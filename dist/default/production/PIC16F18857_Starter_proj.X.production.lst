@@ -1,0 +1,2866 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V1.44 build -154322312 
+                                                                                               Sun Oct 01 18:31:56 2017
+
+Microchip Technology Omniscient Code Generator v1.44 (Free mode) build 201709140600
+     1  0000                     
+      + 0000                     
+     2                           ; Version 1.44
+     3                           ; Generated 14/09/2017 GMT
+     4                           
+     5                           ; 
+     6                           ; Copyright © 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
+     7                           ; All rights reserved.
+     8                           ; 
+     9                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+                                 ip").
+    10                           ; 
+    11                           ; Redistribution and use in source and binary forms, with or without modification, are
+    12                           ; permitted provided that the following conditions are met:
+    13                           ; 
+    14                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+                                 t of
+    15                           ;        conditions and the following disclaimer.
+    16                           ; 
+    17                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+                                 list
+    18                           ;        of conditions and the following disclaimer in the documentation and/or other
+    19                           ;        materials provided with the distribution.
+    20                           ; 
+    21                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+                                 is
+    22                           ;        software without specific prior written permission.
+    23                           ; 
+    24                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+
+    25                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+                                 OR
+    26                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+                                 T,
+    27                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+                                 
+    28                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+                                 
+    29                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+                                 RICT
+    30                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+                                 SE OF
+    31                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    32                           ; 
+    33                           
+    34                           
+    35                           ; 
+    36                           ; Code-generator required, PIC16F18857 Definitions
+    37                           ; 
+    38  0008                     fsr0h equ 05h
+    39  0005                     fsr0l equ 04h
+    40  0004                     fsr1h equ 07h
+    41  0007                     fsr1l equ 06h
+    42  0006                     indf equ 00h
+    43  0000                     indf0 equ 00h
+    44  0000                     indf1 equ 01h
+    45  0001                     intcon equ 0Bh
+    46  000B                     pc equ 02h
+    47  0002                     pcl equ 02h
+    48  0002                     pclath equ 0Ah
+    49  000A                     status equ 03h
+    50  0003                     wreg equ 09h
+    51  0009                     
+     2                           opt pagewidth 120
+     3  0000                     clrz	macro
+     4                           	bcf	3,2
+     5                           	endm
+     6  0000                     setc	macro
+     7                           	bsf	3,0
+     8                           	endm
+     9  0000                     setz	macro
+    10                           	bsf	3,2
+    11                           	endm
+    12  0000                     skipc	macro
+    13                           	btfss	3,0
+    14                           	endm
+    15  0000                     skipz	macro
+    16                           	btfss	3,2
+    17                           	endm
+    18  0000                     skipnc	macro
+    19                           	btfsc	3,0
+    20                           	endm
+    21  0000                     skipnz	macro
+    22                           	btfsc	3,2
+    23                           	endm
+    24  0000                     pushw	macro
+    25                           	movwi fsr1++
+    26                           	endm
+    27  0000                     popw	macro
+    28                           	moviw --fsr1
+    29                           	endm
+    30  0000                     # 52 "C:\xc8\include\pic16f18857.h"
+    31                           INDF0 equ 00h ;# 
+    32  0000                     # 72 "C:\xc8\include\pic16f18857.h"
+    33                           INDF1 equ 01h ;# 
+    34  0001                     # 92 "C:\xc8\include\pic16f18857.h"
+    35                           PCL equ 02h ;# 
+    36  0002                     # 112 "C:\xc8\include\pic16f18857.h"
+    37                           STATUS equ 03h ;# 
+    38  0003                     # 175 "C:\xc8\include\pic16f18857.h"
+    39                           FSR0L equ 04h ;# 
+    40  0004                     # 195 "C:\xc8\include\pic16f18857.h"
+    41                           FSR0H equ 05h ;# 
+    42  0005                     # 219 "C:\xc8\include\pic16f18857.h"
+    43                           FSR1L equ 06h ;# 
+    44  0006                     # 239 "C:\xc8\include\pic16f18857.h"
+    45                           FSR1H equ 07h ;# 
+    46  0007                     # 259 "C:\xc8\include\pic16f18857.h"
+    47                           BSR equ 08h ;# 
+    48  0008                     # 317 "C:\xc8\include\pic16f18857.h"
+    49                           WREG equ 09h ;# 
+    50  0009                     # 337 "C:\xc8\include\pic16f18857.h"
+    51                           PCLATH equ 0Ah ;# 
+    52  000A                     # 357 "C:\xc8\include\pic16f18857.h"
+    53                           INTCON equ 0Bh ;# 
+    54  000B                     # 390 "C:\xc8\include\pic16f18857.h"
+    55                           PORTA equ 0Ch ;# 
+    56  000C                     # 452 "C:\xc8\include\pic16f18857.h"
+    57                           PORTB equ 0Dh ;# 
+    58  000D                     # 514 "C:\xc8\include\pic16f18857.h"
+    59                           PORTC equ 0Eh ;# 
+    60  000E                     # 576 "C:\xc8\include\pic16f18857.h"
+    61                           PORTE equ 010h ;# 
+    62  0010                     # 597 "C:\xc8\include\pic16f18857.h"
+    63                           TRISA equ 011h ;# 
+    64  0011                     # 659 "C:\xc8\include\pic16f18857.h"
+    65                           TRISB equ 012h ;# 
+    66  0012                     # 721 "C:\xc8\include\pic16f18857.h"
+    67                           TRISC equ 013h ;# 
+    68  0013                     # 783 "C:\xc8\include\pic16f18857.h"
+    69                           LATA equ 016h ;# 
+    70  0016                     # 845 "C:\xc8\include\pic16f18857.h"
+    71                           LATB equ 017h ;# 
+    72  0017                     # 907 "C:\xc8\include\pic16f18857.h"
+    73                           LATC equ 018h ;# 
+    74  0018                     # 969 "C:\xc8\include\pic16f18857.h"
+    75                           TMR0L equ 01Ch ;# 
+    76  001C                     # 974 "C:\xc8\include\pic16f18857.h"
+    77                           TMR0 equ 01Ch ;# 
+    78  001C                     # 1107 "C:\xc8\include\pic16f18857.h"
+    79                           TMR0H equ 01Dh ;# 
+    80  001D                     # 1112 "C:\xc8\include\pic16f18857.h"
+    81                           PR0 equ 01Dh ;# 
+    82  001D                     # 1361 "C:\xc8\include\pic16f18857.h"
+    83                           T0CON0 equ 01Eh ;# 
+    84  001E                     # 1426 "C:\xc8\include\pic16f18857.h"
+    85                           T0CON1 equ 01Fh ;# 
+    86  001F                     # 1537 "C:\xc8\include\pic16f18857.h"
+    87                           ADRES equ 08Ch ;# 
+    88  008C                     # 1544 "C:\xc8\include\pic16f18857.h"
+    89                           ADRESL equ 08Ch ;# 
+    90  008C                     # 1564 "C:\xc8\include\pic16f18857.h"
+    91                           ADRESH equ 08Dh ;# 
+    92  008D                     # 1571 "C:\xc8\include\pic16f18857.h"
+    93                           ADPREV equ 08Eh ;# 
+    94  008E                     # 1578 "C:\xc8\include\pic16f18857.h"
+    95                           ADPREVL equ 08Eh ;# 
+    96  008E                     # 1648 "C:\xc8\include\pic16f18857.h"
+    97                           ADPREVH equ 08Fh ;# 
+    98  008F                     # 1718 "C:\xc8\include\pic16f18857.h"
+    99                           ADACC equ 090h ;# 
+   100  0090                     # 1725 "C:\xc8\include\pic16f18857.h"
+   101                           ADACCL equ 090h ;# 
+   102  0090                     # 1795 "C:\xc8\include\pic16f18857.h"
+   103                           ADACCH equ 091h ;# 
+   104  0091                     # 1865 "C:\xc8\include\pic16f18857.h"
+   105                           ADCON0 equ 093h ;# 
+   106  0093                     # 1964 "C:\xc8\include\pic16f18857.h"
+   107                           ADCON1 equ 094h ;# 
+   108  0094                     # 2003 "C:\xc8\include\pic16f18857.h"
+   109                           ADCON2 equ 095h ;# 
+   110  0095                     # 2080 "C:\xc8\include\pic16f18857.h"
+   111                           ADCON3 equ 096h ;# 
+   112  0096                     # 2151 "C:\xc8\include\pic16f18857.h"
+   113                           ADSTAT equ 097h ;# 
+   114  0097                     # 2221 "C:\xc8\include\pic16f18857.h"
+   115                           ADCLK equ 098h ;# 
+   116  0098                     # 2279 "C:\xc8\include\pic16f18857.h"
+   117                           ADACT equ 099h ;# 
+   118  0099                     # 2331 "C:\xc8\include\pic16f18857.h"
+   119                           ADREF equ 09Ah ;# 
+   120  009A                     # 2372 "C:\xc8\include\pic16f18857.h"
+   121                           ADCAP equ 09Bh ;# 
+   122  009B                     # 2424 "C:\xc8\include\pic16f18857.h"
+   123                           ADPRE equ 09Ch ;# 
+   124  009C                     # 2494 "C:\xc8\include\pic16f18857.h"
+   125                           ADACQ equ 09Dh ;# 
+   126  009D                     # 2564 "C:\xc8\include\pic16f18857.h"
+   127                           ADPCH equ 09Eh ;# 
+   128  009E                     # 2622 "C:\xc8\include\pic16f18857.h"
+   129                           ADCNT equ 010Ch ;# 
+   130  010C                     # 2692 "C:\xc8\include\pic16f18857.h"
+   131                           ADRPT equ 010Dh ;# 
+   132  010D                     # 2762 "C:\xc8\include\pic16f18857.h"
+   133                           ADLTH equ 010Eh ;# 
+   134  010E                     # 2769 "C:\xc8\include\pic16f18857.h"
+   135                           ADLTHL equ 010Eh ;# 
+   136  010E                     # 2839 "C:\xc8\include\pic16f18857.h"
+   137                           ADLTHH equ 010Fh ;# 
+   138  010F                     # 2909 "C:\xc8\include\pic16f18857.h"
+   139                           ADUTH equ 0110h ;# 
+   140  0110                     # 2916 "C:\xc8\include\pic16f18857.h"
+   141                           ADUTHL equ 0110h ;# 
+   142  0110                     # 2986 "C:\xc8\include\pic16f18857.h"
+   143                           ADUTHH equ 0111h ;# 
+   144  0111                     # 3056 "C:\xc8\include\pic16f18857.h"
+   145                           ADSTPT equ 0112h ;# 
+   146  0112                     # 3063 "C:\xc8\include\pic16f18857.h"
+   147                           ADSTPTL equ 0112h ;# 
+   148  0112                     # 3133 "C:\xc8\include\pic16f18857.h"
+   149                           ADSTPTH equ 0113h ;# 
+   150  0113                     # 3203 "C:\xc8\include\pic16f18857.h"
+   151                           ADFLTR equ 0114h ;# 
+   152  0114                     # 3210 "C:\xc8\include\pic16f18857.h"
+   153                           ADFLTRL equ 0114h ;# 
+   154  0114                     # 3280 "C:\xc8\include\pic16f18857.h"
+   155                           ADFLTRH equ 0115h ;# 
+   156  0115                     # 3350 "C:\xc8\include\pic16f18857.h"
+   157                           ADERR equ 0116h ;# 
+   158  0116                     # 3357 "C:\xc8\include\pic16f18857.h"
+   159                           ADERRL equ 0116h ;# 
+   160  0116                     # 3427 "C:\xc8\include\pic16f18857.h"
+   161                           ADERRH equ 0117h ;# 
+   162  0117                     # 3497 "C:\xc8\include\pic16f18857.h"
+   163                           RC1REG equ 0119h ;# 
+   164  0119                     # 3502 "C:\xc8\include\pic16f18857.h"
+   165                           RCREG equ 0119h ;# 
+   166  0119                     # 3506 "C:\xc8\include\pic16f18857.h"
+   167                           RCREG1 equ 0119h ;# 
+   168  0119                     # 3551 "C:\xc8\include\pic16f18857.h"
+   169                           TX1REG equ 011Ah ;# 
+   170  011A                     # 3556 "C:\xc8\include\pic16f18857.h"
+   171                           TXREG1 equ 011Ah ;# 
+   172  011A                     # 3560 "C:\xc8\include\pic16f18857.h"
+   173                           TXREG equ 011Ah ;# 
+   174  011A                     # 3605 "C:\xc8\include\pic16f18857.h"
+   175                           SP1BRG equ 011Bh ;# 
+   176  011B                     # 3612 "C:\xc8\include\pic16f18857.h"
+   177                           SP1BRGL equ 011Bh ;# 
+   178  011B                     # 3617 "C:\xc8\include\pic16f18857.h"
+   179                           SPBRG equ 011Bh ;# 
+   180  011B                     # 3621 "C:\xc8\include\pic16f18857.h"
+   181                           SPBRG1 equ 011Bh ;# 
+   182  011B                     # 3625 "C:\xc8\include\pic16f18857.h"
+   183                           SPBRGL equ 011Bh ;# 
+   184  011B                     # 3682 "C:\xc8\include\pic16f18857.h"
+   185                           SP1BRGH equ 011Ch ;# 
+   186  011C                     # 3687 "C:\xc8\include\pic16f18857.h"
+   187                           SPBRGH equ 011Ch ;# 
+   188  011C                     # 3691 "C:\xc8\include\pic16f18857.h"
+   189                           SPBRGH1 equ 011Ch ;# 
+   190  011C                     # 3736 "C:\xc8\include\pic16f18857.h"
+   191                           RC1STA equ 011Dh ;# 
+   192  011D                     # 3741 "C:\xc8\include\pic16f18857.h"
+   193                           RCSTA1 equ 011Dh ;# 
+   194  011D                     # 3745 "C:\xc8\include\pic16f18857.h"
+   195                           RCSTA equ 011Dh ;# 
+   196  011D                     # 3916 "C:\xc8\include\pic16f18857.h"
+   197                           TX1STA equ 011Eh ;# 
+   198  011E                     # 3921 "C:\xc8\include\pic16f18857.h"
+   199                           TXSTA1 equ 011Eh ;# 
+   200  011E                     # 3925 "C:\xc8\include\pic16f18857.h"
+   201                           TXSTA equ 011Eh ;# 
+   202  011E                     # 4096 "C:\xc8\include\pic16f18857.h"
+   203                           BAUD1CON equ 011Fh ;# 
+   204  011F                     # 4101 "C:\xc8\include\pic16f18857.h"
+   205                           BAUDCON1 equ 011Fh ;# 
+   206  011F                     # 4105 "C:\xc8\include\pic16f18857.h"
+   207                           BAUDCTL1 equ 011Fh ;# 
+   208  011F                     # 4109 "C:\xc8\include\pic16f18857.h"
+   209                           BAUDCON equ 011Fh ;# 
+   210  011F                     # 4113 "C:\xc8\include\pic16f18857.h"
+   211                           BAUDCTL equ 011Fh ;# 
+   212  011F                     # 4342 "C:\xc8\include\pic16f18857.h"
+   213                           SSP1BUF equ 018Ch ;# 
+   214  018C                     # 4362 "C:\xc8\include\pic16f18857.h"
+   215                           SSP1ADD equ 018Dh ;# 
+   216  018D                     # 4482 "C:\xc8\include\pic16f18857.h"
+   217                           SSP1MSK equ 018Eh ;# 
+   218  018E                     # 4552 "C:\xc8\include\pic16f18857.h"
+   219                           SSP1STAT equ 018Fh ;# 
+   220  018F                     # 4916 "C:\xc8\include\pic16f18857.h"
+   221                           SSP1CON1 equ 0190h ;# 
+   222  0190                     # 5036 "C:\xc8\include\pic16f18857.h"
+   223                           SSP1CON2 equ 0191h ;# 
+   224  0191                     # 5223 "C:\xc8\include\pic16f18857.h"
+   225                           SSP1CON3 equ 0192h ;# 
+   226  0192                     # 5285 "C:\xc8\include\pic16f18857.h"
+   227                           SSP2BUF equ 0196h ;# 
+   228  0196                     # 5305 "C:\xc8\include\pic16f18857.h"
+   229                           SSP2ADD equ 0197h ;# 
+   230  0197                     # 5425 "C:\xc8\include\pic16f18857.h"
+   231                           SSP2MSK equ 0198h ;# 
+   232  0198                     # 5495 "C:\xc8\include\pic16f18857.h"
+   233                           SSP2STAT equ 0199h ;# 
+   234  0199                     # 5859 "C:\xc8\include\pic16f18857.h"
+   235                           SSP2CON1 equ 019Ah ;# 
+   236  019A                     # 5979 "C:\xc8\include\pic16f18857.h"
+   237                           SSP2CON2 equ 019Bh ;# 
+   238  019B                     # 6166 "C:\xc8\include\pic16f18857.h"
+   239                           SSP2CON3 equ 019Ch ;# 
+   240  019C                     # 6228 "C:\xc8\include\pic16f18857.h"
+   241                           TMR1 equ 020Ch ;# 
+   242  020C                     # 6235 "C:\xc8\include\pic16f18857.h"
+   243                           TMR1L equ 020Ch ;# 
+   244  020C                     # 6405 "C:\xc8\include\pic16f18857.h"
+   245                           TMR1H equ 020Dh ;# 
+   246  020D                     # 6525 "C:\xc8\include\pic16f18857.h"
+   247                           T1CON equ 020Eh ;# 
+   248  020E                     # 6621 "C:\xc8\include\pic16f18857.h"
+   249                           T1GCON equ 020Fh ;# 
+   250  020F                     # 6626 "C:\xc8\include\pic16f18857.h"
+   251                           PR1 equ 020Fh ;# 
+   252  020F                     # 6817 "C:\xc8\include\pic16f18857.h"
+   253                           T1GATE equ 0210h ;# 
+   254  0210                     # 6822 "C:\xc8\include\pic16f18857.h"
+   255                           TMR1GATE equ 0210h ;# 
+   256  0210                     # 6983 "C:\xc8\include\pic16f18857.h"
+   257                           T1CLK equ 0211h ;# 
+   258  0211                     # 6988 "C:\xc8\include\pic16f18857.h"
+   259                           TMR1CLK equ 0211h ;# 
+   260  0211                     # 7125 "C:\xc8\include\pic16f18857.h"
+   261                           TMR3 equ 0212h ;# 
+   262  0212                     # 7132 "C:\xc8\include\pic16f18857.h"
+   263                           TMR3L equ 0212h ;# 
+   264  0212                     # 7302 "C:\xc8\include\pic16f18857.h"
+   265                           TMR3H equ 0213h ;# 
+   266  0213                     # 7422 "C:\xc8\include\pic16f18857.h"
+   267                           T3CON equ 0214h ;# 
+   268  0214                     # 7518 "C:\xc8\include\pic16f18857.h"
+   269                           T3GCON equ 0215h ;# 
+   270  0215                     # 7523 "C:\xc8\include\pic16f18857.h"
+   271                           PR3 equ 0215h ;# 
+   272  0215                     # 7714 "C:\xc8\include\pic16f18857.h"
+   273                           T3GATE equ 0216h ;# 
+   274  0216                     # 7719 "C:\xc8\include\pic16f18857.h"
+   275                           TMR3GATE equ 0216h ;# 
+   276  0216                     # 7880 "C:\xc8\include\pic16f18857.h"
+   277                           T3CLK equ 0217h ;# 
+   278  0217                     # 7885 "C:\xc8\include\pic16f18857.h"
+   279                           TMR3CLK equ 0217h ;# 
+   280  0217                     # 8022 "C:\xc8\include\pic16f18857.h"
+   281                           TMR5 equ 0218h ;# 
+   282  0218                     # 8029 "C:\xc8\include\pic16f18857.h"
+   283                           TMR5L equ 0218h ;# 
+   284  0218                     # 8199 "C:\xc8\include\pic16f18857.h"
+   285                           TMR5H equ 0219h ;# 
+   286  0219                     # 8319 "C:\xc8\include\pic16f18857.h"
+   287                           T5CON equ 021Ah ;# 
+   288  021A                     # 8415 "C:\xc8\include\pic16f18857.h"
+   289                           T5GCON equ 021Bh ;# 
+   290  021B                     # 8420 "C:\xc8\include\pic16f18857.h"
+   291                           PR5 equ 021Bh ;# 
+   292  021B                     # 8611 "C:\xc8\include\pic16f18857.h"
+   293                           T5GATE equ 021Ch ;# 
+   294  021C                     # 8616 "C:\xc8\include\pic16f18857.h"
+   295                           TMR5GATE equ 021Ch ;# 
+   296  021C                     # 8777 "C:\xc8\include\pic16f18857.h"
+   297                           T5CLK equ 021Dh ;# 
+   298  021D                     # 8782 "C:\xc8\include\pic16f18857.h"
+   299                           TMR5CLK equ 021Dh ;# 
+   300  021D                     # 8919 "C:\xc8\include\pic16f18857.h"
+   301                           CCPTMRS0 equ 021Eh ;# 
+   302  021E                     # 9007 "C:\xc8\include\pic16f18857.h"
+   303                           CCPTMRS1 equ 021Fh ;# 
+   304  021F                     # 9077 "C:\xc8\include\pic16f18857.h"
+   305                           T2TMR equ 028Ch ;# 
+   306  028C                     # 9082 "C:\xc8\include\pic16f18857.h"
+   307                           TMR2 equ 028Ch ;# 
+   308  028C                     # 9115 "C:\xc8\include\pic16f18857.h"
+   309                           T2PR equ 028Dh ;# 
+   310  028D                     # 9120 "C:\xc8\include\pic16f18857.h"
+   311                           PR2 equ 028Dh ;# 
+   312  028D                     # 9153 "C:\xc8\include\pic16f18857.h"
+   313                           T2CON equ 028Eh ;# 
+   314  028E                     # 9299 "C:\xc8\include\pic16f18857.h"
+   315                           T2HLT equ 028Fh ;# 
+   316  028F                     # 9427 "C:\xc8\include\pic16f18857.h"
+   317                           T2CLK equ 0290h ;# 
+   318  0290                     # 9432 "C:\xc8\include\pic16f18857.h"
+   319                           T2CLKCON equ 0290h ;# 
+   320  0290                     # 9585 "C:\xc8\include\pic16f18857.h"
+   321                           T2RST equ 0291h ;# 
+   322  0291                     # 9677 "C:\xc8\include\pic16f18857.h"
+   323                           T4TMR equ 0292h ;# 
+   324  0292                     # 9682 "C:\xc8\include\pic16f18857.h"
+   325                           TMR4 equ 0292h ;# 
+   326  0292                     # 9715 "C:\xc8\include\pic16f18857.h"
+   327                           T4PR equ 0293h ;# 
+   328  0293                     # 9720 "C:\xc8\include\pic16f18857.h"
+   329                           PR4 equ 0293h ;# 
+   330  0293                     # 9753 "C:\xc8\include\pic16f18857.h"
+   331                           T4CON equ 0294h ;# 
+   332  0294                     # 9899 "C:\xc8\include\pic16f18857.h"
+   333                           T4HLT equ 0295h ;# 
+   334  0295                     # 10027 "C:\xc8\include\pic16f18857.h"
+   335                           T4CLK equ 0296h ;# 
+   336  0296                     # 10032 "C:\xc8\include\pic16f18857.h"
+   337                           T4CLKCON equ 0296h ;# 
+   338  0296                     # 10185 "C:\xc8\include\pic16f18857.h"
+   339                           T4RST equ 0297h ;# 
+   340  0297                     # 10277 "C:\xc8\include\pic16f18857.h"
+   341                           T6TMR equ 0298h ;# 
+   342  0298                     # 10282 "C:\xc8\include\pic16f18857.h"
+   343                           TMR6 equ 0298h ;# 
+   344  0298                     # 10315 "C:\xc8\include\pic16f18857.h"
+   345                           T6PR equ 0299h ;# 
+   346  0299                     # 10320 "C:\xc8\include\pic16f18857.h"
+   347                           PR6 equ 0299h ;# 
+   348  0299                     # 10353 "C:\xc8\include\pic16f18857.h"
+   349                           T6CON equ 029Ah ;# 
+   350  029A                     # 10499 "C:\xc8\include\pic16f18857.h"
+   351                           T6HLT equ 029Bh ;# 
+   352  029B                     # 10627 "C:\xc8\include\pic16f18857.h"
+   353                           T6CLK equ 029Ch ;# 
+   354  029C                     # 10632 "C:\xc8\include\pic16f18857.h"
+   355                           T6CLKCON equ 029Ch ;# 
+   356  029C                     # 10785 "C:\xc8\include\pic16f18857.h"
+   357                           T6RST equ 029Dh ;# 
+   358  029D                     # 10877 "C:\xc8\include\pic16f18857.h"
+   359                           CCPR1 equ 030Ch ;# 
+   360  030C                     # 10884 "C:\xc8\include\pic16f18857.h"
+   361                           CCPR1L equ 030Ch ;# 
+   362  030C                     # 10904 "C:\xc8\include\pic16f18857.h"
+   363                           CCPR1H equ 030Dh ;# 
+   364  030D                     # 10924 "C:\xc8\include\pic16f18857.h"
+   365                           CCP1CON equ 030Eh ;# 
+   366  030E                     # 11067 "C:\xc8\include\pic16f18857.h"
+   367                           CCP1CAP equ 030Fh ;# 
+   368  030F                     # 11135 "C:\xc8\include\pic16f18857.h"
+   369                           CCPR2 equ 0310h ;# 
+   370  0310                     # 11142 "C:\xc8\include\pic16f18857.h"
+   371                           CCPR2L equ 0310h ;# 
+   372  0310                     # 11162 "C:\xc8\include\pic16f18857.h"
+   373                           CCPR2H equ 0311h ;# 
+   374  0311                     # 11182 "C:\xc8\include\pic16f18857.h"
+   375                           CCP2CON equ 0312h ;# 
+   376  0312                     # 11325 "C:\xc8\include\pic16f18857.h"
+   377                           CCP2CAP equ 0313h ;# 
+   378  0313                     # 11393 "C:\xc8\include\pic16f18857.h"
+   379                           CCPR3 equ 0314h ;# 
+   380  0314                     # 11400 "C:\xc8\include\pic16f18857.h"
+   381                           CCPR3L equ 0314h ;# 
+   382  0314                     # 11420 "C:\xc8\include\pic16f18857.h"
+   383                           CCPR3H equ 0315h ;# 
+   384  0315                     # 11440 "C:\xc8\include\pic16f18857.h"
+   385                           CCP3CON equ 0316h ;# 
+   386  0316                     # 11583 "C:\xc8\include\pic16f18857.h"
+   387                           CCP3CAP equ 0317h ;# 
+   388  0317                     # 11651 "C:\xc8\include\pic16f18857.h"
+   389                           CCPR4 equ 0318h ;# 
+   390  0318                     # 11658 "C:\xc8\include\pic16f18857.h"
+   391                           CCPR4L equ 0318h ;# 
+   392  0318                     # 11678 "C:\xc8\include\pic16f18857.h"
+   393                           CCPR4H equ 0319h ;# 
+   394  0319                     # 11698 "C:\xc8\include\pic16f18857.h"
+   395                           CCP4CON equ 031Ah ;# 
+   396  031A                     # 11841 "C:\xc8\include\pic16f18857.h"
+   397                           CCP4CAP equ 031Bh ;# 
+   398  031B                     # 11909 "C:\xc8\include\pic16f18857.h"
+   399                           CCPR5 equ 031Ch ;# 
+   400  031C                     # 11916 "C:\xc8\include\pic16f18857.h"
+   401                           CCPR5L equ 031Ch ;# 
+   402  031C                     # 11936 "C:\xc8\include\pic16f18857.h"
+   403                           CCPR5H equ 031Dh ;# 
+   404  031D                     # 11956 "C:\xc8\include\pic16f18857.h"
+   405                           CCP5CON equ 031Eh ;# 
+   406  031E                     # 12099 "C:\xc8\include\pic16f18857.h"
+   407                           CCP5CAP equ 031Fh ;# 
+   408  031F                     # 12167 "C:\xc8\include\pic16f18857.h"
+   409                           PWM6DCL equ 038Ch ;# 
+   410  038C                     # 12233 "C:\xc8\include\pic16f18857.h"
+   411                           PWM6DCH equ 038Dh ;# 
+   412  038D                     # 12403 "C:\xc8\include\pic16f18857.h"
+   413                           PWM6CON equ 038Eh ;# 
+   414  038E                     # 12459 "C:\xc8\include\pic16f18857.h"
+   415                           PWM7DCL equ 0390h ;# 
+   416  0390                     # 12525 "C:\xc8\include\pic16f18857.h"
+   417                           PWM7DCH equ 0391h ;# 
+   418  0391                     # 12695 "C:\xc8\include\pic16f18857.h"
+   419                           PWM7CON equ 0392h ;# 
+   420  0392                     # 12751 "C:\xc8\include\pic16f18857.h"
+   421                           SCANLADRL equ 040Ch ;# 
+   422  040C                     # 12879 "C:\xc8\include\pic16f18857.h"
+   423                           SCANLADRH equ 040Dh ;# 
+   424  040D                     # 13007 "C:\xc8\include\pic16f18857.h"
+   425                           SCANHADRL equ 040Eh ;# 
+   426  040E                     # 13135 "C:\xc8\include\pic16f18857.h"
+   427                           SCANHADRH equ 040Fh ;# 
+   428  040F                     # 13263 "C:\xc8\include\pic16f18857.h"
+   429                           SCANCON0 equ 0410h ;# 
+   430  0410                     # 13385 "C:\xc8\include\pic16f18857.h"
+   431                           SCANTRIG equ 0411h ;# 
+   432  0411                     # 13465 "C:\xc8\include\pic16f18857.h"
+   433                           CRCDATA equ 0416h ;# 
+   434  0416                     # 13472 "C:\xc8\include\pic16f18857.h"
+   435                           CRCDATL equ 0416h ;# 
+   436  0416                     # 13534 "C:\xc8\include\pic16f18857.h"
+   437                           CRCDATH equ 0417h ;# 
+   438  0417                     # 13596 "C:\xc8\include\pic16f18857.h"
+   439                           CRCACC equ 0418h ;# 
+   440  0418                     # 13603 "C:\xc8\include\pic16f18857.h"
+   441                           CRCACCL equ 0418h ;# 
+   442  0418                     # 13665 "C:\xc8\include\pic16f18857.h"
+   443                           CRCACCH equ 0419h ;# 
+   444  0419                     # 13727 "C:\xc8\include\pic16f18857.h"
+   445                           CRCSHFT equ 041Ah ;# 
+   446  041A                     # 13734 "C:\xc8\include\pic16f18857.h"
+   447                           CRCSHIFTL equ 041Ah ;# 
+   448  041A                     # 13796 "C:\xc8\include\pic16f18857.h"
+   449                           CRCSHIFTH equ 041Bh ;# 
+   450  041B                     # 13858 "C:\xc8\include\pic16f18857.h"
+   451                           CRCXOR equ 041Ch ;# 
+   452  041C                     # 13865 "C:\xc8\include\pic16f18857.h"
+   453                           CRCXORL equ 041Ch ;# 
+   454  041C                     # 13922 "C:\xc8\include\pic16f18857.h"
+   455                           CRCXORH equ 041Dh ;# 
+   456  041D                     # 13984 "C:\xc8\include\pic16f18857.h"
+   457                           CRCCON0 equ 041Eh ;# 
+   458  041E                     # 14044 "C:\xc8\include\pic16f18857.h"
+   459                           CRCCON1 equ 041Fh ;# 
+   460  041F                     # 14122 "C:\xc8\include\pic16f18857.h"
+   461                           SMT1TMR equ 048Ch ;# 
+   462  048C                     # 14129 "C:\xc8\include\pic16f18857.h"
+   463                           SMT1TMRL equ 048Ch ;# 
+   464  048C                     # 14257 "C:\xc8\include\pic16f18857.h"
+   465                           SMT1TMRH equ 048Dh ;# 
+   466  048D                     # 14385 "C:\xc8\include\pic16f18857.h"
+   467                           SMT1TMRU equ 048Eh ;# 
+   468  048E                     # 14515 "C:\xc8\include\pic16f18857.h"
+   469                           SMT1CPR equ 048Fh ;# 
+   470  048F                     # 14522 "C:\xc8\include\pic16f18857.h"
+   471                           SMT1CPRL equ 048Fh ;# 
+   472  048F                     # 14650 "C:\xc8\include\pic16f18857.h"
+   473                           SMT1CPRH equ 0490h ;# 
+   474  0490                     # 14778 "C:\xc8\include\pic16f18857.h"
+   475                           SMT1CPRU equ 0491h ;# 
+   476  0491                     # 14908 "C:\xc8\include\pic16f18857.h"
+   477                           SMT1CPW equ 0492h ;# 
+   478  0492                     # 14915 "C:\xc8\include\pic16f18857.h"
+   479                           SMT1CPWL equ 0492h ;# 
+   480  0492                     # 15043 "C:\xc8\include\pic16f18857.h"
+   481                           SMT1CPWH equ 0493h ;# 
+   482  0493                     # 15171 "C:\xc8\include\pic16f18857.h"
+   483                           SMT1CPWU equ 0494h ;# 
+   484  0494                     # 15301 "C:\xc8\include\pic16f18857.h"
+   485                           SMT1PR equ 0495h ;# 
+   486  0495                     # 15308 "C:\xc8\include\pic16f18857.h"
+   487                           SMT1PRL equ 0495h ;# 
+   488  0495                     # 15436 "C:\xc8\include\pic16f18857.h"
+   489                           SMT1PRH equ 0496h ;# 
+   490  0496                     # 15564 "C:\xc8\include\pic16f18857.h"
+   491                           SMT1PRU equ 0497h ;# 
+   492  0497                     # 15692 "C:\xc8\include\pic16f18857.h"
+   493                           SMT1CON0 equ 0498h ;# 
+   494  0498                     # 15810 "C:\xc8\include\pic16f18857.h"
+   495                           SMT1CON1 equ 0499h ;# 
+   496  0499                     # 15890 "C:\xc8\include\pic16f18857.h"
+   497                           SMT1STAT equ 049Ah ;# 
+   498  049A                     # 15989 "C:\xc8\include\pic16f18857.h"
+   499                           SMT1CLK equ 049Bh ;# 
+   500  049B                     # 16057 "C:\xc8\include\pic16f18857.h"
+   501                           SMT1SIG equ 049Ch ;# 
+   502  049C                     # 16149 "C:\xc8\include\pic16f18857.h"
+   503                           SMT1WIN equ 049Dh ;# 
+   504  049D                     # 16243 "C:\xc8\include\pic16f18857.h"
+   505                           SMT2TMR equ 050Ch ;# 
+   506  050C                     # 16250 "C:\xc8\include\pic16f18857.h"
+   507                           SMT2TMRL equ 050Ch ;# 
+   508  050C                     # 16378 "C:\xc8\include\pic16f18857.h"
+   509                           SMT2TMRH equ 050Dh ;# 
+   510  050D                     # 16506 "C:\xc8\include\pic16f18857.h"
+   511                           SMT2TMRU equ 050Eh ;# 
+   512  050E                     # 16636 "C:\xc8\include\pic16f18857.h"
+   513                           SMT2CPR equ 050Fh ;# 
+   514  050F                     # 16643 "C:\xc8\include\pic16f18857.h"
+   515                           SMT2CPRL equ 050Fh ;# 
+   516  050F                     # 16771 "C:\xc8\include\pic16f18857.h"
+   517                           SMT2CPRH equ 0510h ;# 
+   518  0510                     # 16899 "C:\xc8\include\pic16f18857.h"
+   519                           SMT2CPRU equ 0511h ;# 
+   520  0511                     # 17029 "C:\xc8\include\pic16f18857.h"
+   521                           SMT2CPW equ 0512h ;# 
+   522  0512                     # 17036 "C:\xc8\include\pic16f18857.h"
+   523                           SMT2CPWL equ 0512h ;# 
+   524  0512                     # 17164 "C:\xc8\include\pic16f18857.h"
+   525                           SMT2CPWH equ 0513h ;# 
+   526  0513                     # 17292 "C:\xc8\include\pic16f18857.h"
+   527                           SMT2CPWU equ 0514h ;# 
+   528  0514                     # 17422 "C:\xc8\include\pic16f18857.h"
+   529                           SMT2PR equ 0515h ;# 
+   530  0515                     # 17429 "C:\xc8\include\pic16f18857.h"
+   531                           SMT2PRL equ 0515h ;# 
+   532  0515                     # 17557 "C:\xc8\include\pic16f18857.h"
+   533                           SMT2PRH equ 0516h ;# 
+   534  0516                     # 17685 "C:\xc8\include\pic16f18857.h"
+   535                           SMT2PRU equ 0517h ;# 
+   536  0517                     # 17813 "C:\xc8\include\pic16f18857.h"
+   537                           SMT2CON0 equ 0518h ;# 
+   538  0518                     # 17931 "C:\xc8\include\pic16f18857.h"
+   539                           SMT2CON1 equ 0519h ;# 
+   540  0519                     # 18011 "C:\xc8\include\pic16f18857.h"
+   541                           SMT2STAT equ 051Ah ;# 
+   542  051A                     # 18110 "C:\xc8\include\pic16f18857.h"
+   543                           SMT2CLK equ 051Bh ;# 
+   544  051B                     # 18178 "C:\xc8\include\pic16f18857.h"
+   545                           SMT2SIG equ 051Ch ;# 
+   546  051C                     # 18270 "C:\xc8\include\pic16f18857.h"
+   547                           SMT2WIN equ 051Dh ;# 
+   548  051D                     # 18364 "C:\xc8\include\pic16f18857.h"
+   549                           NCO1ACC equ 058Ch ;# 
+   550  058C                     # 18371 "C:\xc8\include\pic16f18857.h"
+   551                           NCO1ACCL equ 058Ch ;# 
+   552  058C                     # 18441 "C:\xc8\include\pic16f18857.h"
+   553                           NCO1ACCH equ 058Dh ;# 
+   554  058D                     # 18511 "C:\xc8\include\pic16f18857.h"
+   555                           NCO1ACCU equ 058Eh ;# 
+   556  058E                     # 18559 "C:\xc8\include\pic16f18857.h"
+   557                           NCO1INC equ 058Fh ;# 
+   558  058F                     # 18566 "C:\xc8\include\pic16f18857.h"
+   559                           NCO1INCL equ 058Fh ;# 
+   560  058F                     # 18636 "C:\xc8\include\pic16f18857.h"
+   561                           NCO1INCH equ 0590h ;# 
+   562  0590                     # 18706 "C:\xc8\include\pic16f18857.h"
+   563                           NCO1INCU equ 0591h ;# 
+   564  0591                     # 18752 "C:\xc8\include\pic16f18857.h"
+   565                           NCO1CON equ 0592h ;# 
+   566  0592                     # 18792 "C:\xc8\include\pic16f18857.h"
+   567                           NCO1CLK equ 0593h ;# 
+   568  0593                     # 18858 "C:\xc8\include\pic16f18857.h"
+   569                           CWG1CLKCON equ 060Ch ;# 
+   570  060C                     # 18886 "C:\xc8\include\pic16f18857.h"
+   571                           CWG1ISM equ 060Dh ;# 
+   572  060D                     # 18932 "C:\xc8\include\pic16f18857.h"
+   573                           CWG1DBR equ 060Eh ;# 
+   574  060E                     # 19036 "C:\xc8\include\pic16f18857.h"
+   575                           CWG1DBF equ 060Fh ;# 
+   576  060F                     # 19140 "C:\xc8\include\pic16f18857.h"
+   577                           CWG1CON0 equ 0610h ;# 
+   578  0610                     # 19241 "C:\xc8\include\pic16f18857.h"
+   579                           CWG1CON1 equ 0611h ;# 
+   580  0611                     # 19319 "C:\xc8\include\pic16f18857.h"
+   581                           CWG1AS0 equ 0612h ;# 
+   582  0612                     # 19439 "C:\xc8\include\pic16f18857.h"
+   583                           CWG1AS1 equ 0613h ;# 
+   584  0613                     # 19495 "C:\xc8\include\pic16f18857.h"
+   585                           CWG1STR equ 0614h ;# 
+   586  0614                     # 19607 "C:\xc8\include\pic16f18857.h"
+   587                           CWG2CLKCON equ 0616h ;# 
+   588  0616                     # 19635 "C:\xc8\include\pic16f18857.h"
+   589                           CWG2ISM equ 0617h ;# 
+   590  0617                     # 19681 "C:\xc8\include\pic16f18857.h"
+   591                           CWG2DBR equ 0618h ;# 
+   592  0618                     # 19785 "C:\xc8\include\pic16f18857.h"
+   593                           CWG2DBF equ 0619h ;# 
+   594  0619                     # 19889 "C:\xc8\include\pic16f18857.h"
+   595                           CWG2CON0 equ 061Ah ;# 
+   596  061A                     # 19990 "C:\xc8\include\pic16f18857.h"
+   597                           CWG2CON1 equ 061Bh ;# 
+   598  061B                     # 20068 "C:\xc8\include\pic16f18857.h"
+   599                           CWG2AS0 equ 061Ch ;# 
+   600  061C                     # 20188 "C:\xc8\include\pic16f18857.h"
+   601                           CWG2AS1 equ 061Dh ;# 
+   602  061D                     # 20244 "C:\xc8\include\pic16f18857.h"
+   603                           CWG2STR equ 061Eh ;# 
+   604  061E                     # 20356 "C:\xc8\include\pic16f18857.h"
+   605                           CWG3CLKCON equ 068Ch ;# 
+   606  068C                     # 20384 "C:\xc8\include\pic16f18857.h"
+   607                           CWG3ISM equ 068Dh ;# 
+   608  068D                     # 20430 "C:\xc8\include\pic16f18857.h"
+   609                           CWG3DBR equ 068Eh ;# 
+   610  068E                     # 20534 "C:\xc8\include\pic16f18857.h"
+   611                           CWG3DBF equ 068Fh ;# 
+   612  068F                     # 20638 "C:\xc8\include\pic16f18857.h"
+   613                           CWG3CON0 equ 0690h ;# 
+   614  0690                     # 20739 "C:\xc8\include\pic16f18857.h"
+   615                           CWG3CON1 equ 0691h ;# 
+   616  0691                     # 20817 "C:\xc8\include\pic16f18857.h"
+   617                           CWG3AS0 equ 0692h ;# 
+   618  0692                     # 20937 "C:\xc8\include\pic16f18857.h"
+   619                           CWG3AS1 equ 0693h ;# 
+   620  0693                     # 20993 "C:\xc8\include\pic16f18857.h"
+   621                           CWG3STR equ 0694h ;# 
+   622  0694                     # 21105 "C:\xc8\include\pic16f18857.h"
+   623                           PIR0 equ 070Ch ;# 
+   624  070C                     # 21138 "C:\xc8\include\pic16f18857.h"
+   625                           PIR1 equ 070Dh ;# 
+   626  070D                     # 21177 "C:\xc8\include\pic16f18857.h"
+   627                           PIR2 equ 070Eh ;# 
+   628  070E                     # 21210 "C:\xc8\include\pic16f18857.h"
+   629                           PIR3 equ 070Fh ;# 
+   630  070F                     # 21260 "C:\xc8\include\pic16f18857.h"
+   631                           PIR4 equ 0710h ;# 
+   632  0710                     # 21310 "C:\xc8\include\pic16f18857.h"
+   633                           PIR5 equ 0711h ;# 
+   634  0711                     # 21367 "C:\xc8\include\pic16f18857.h"
+   635                           PIR6 equ 0712h ;# 
+   636  0712                     # 21411 "C:\xc8\include\pic16f18857.h"
+   637                           PIR7 equ 0713h ;# 
+   638  0713                     # 21477 "C:\xc8\include\pic16f18857.h"
+   639                           PIR8 equ 0714h ;# 
+   640  0714                     # 21527 "C:\xc8\include\pic16f18857.h"
+   641                           PIE0 equ 0716h ;# 
+   642  0716                     # 21560 "C:\xc8\include\pic16f18857.h"
+   643                           PIE1 equ 0717h ;# 
+   644  0717                     # 21599 "C:\xc8\include\pic16f18857.h"
+   645                           PIE2 equ 0718h ;# 
+   646  0718                     # 21632 "C:\xc8\include\pic16f18857.h"
+   647                           PIE3 equ 0719h ;# 
+   648  0719                     # 21682 "C:\xc8\include\pic16f18857.h"
+   649                           PIE4 equ 071Ah ;# 
+   650  071A                     # 21732 "C:\xc8\include\pic16f18857.h"
+   651                           PIE5 equ 071Bh ;# 
+   652  071B                     # 21789 "C:\xc8\include\pic16f18857.h"
+   653                           PIE6 equ 071Ch ;# 
+   654  071C                     # 21833 "C:\xc8\include\pic16f18857.h"
+   655                           PIE7 equ 071Dh ;# 
+   656  071D                     # 21899 "C:\xc8\include\pic16f18857.h"
+   657                           PIE8 equ 071Eh ;# 
+   658  071E                     # 21949 "C:\xc8\include\pic16f18857.h"
+   659                           PMD0 equ 0796h ;# 
+   660  0796                     # 22006 "C:\xc8\include\pic16f18857.h"
+   661                           PMD1 equ 0797h ;# 
+   662  0797                     # 22077 "C:\xc8\include\pic16f18857.h"
+   663                           PMD2 equ 0798h ;# 
+   664  0798                     # 22122 "C:\xc8\include\pic16f18857.h"
+   665                           PMD3 equ 0799h ;# 
+   666  0799                     # 22178 "C:\xc8\include\pic16f18857.h"
+   667                           PMD4 equ 079Ah ;# 
+   668  079A                     # 22229 "C:\xc8\include\pic16f18857.h"
+   669                           PMD5 equ 079Bh ;# 
+   670  079B                     # 22286 "C:\xc8\include\pic16f18857.h"
+   671                           WDTCON0 equ 080Ch ;# 
+   672  080C                     # 22361 "C:\xc8\include\pic16f18857.h"
+   673                           WDTCON1 equ 080Dh ;# 
+   674  080D                     # 22455 "C:\xc8\include\pic16f18857.h"
+   675                           WDTPSL equ 080Eh ;# 
+   676  080E                     # 22583 "C:\xc8\include\pic16f18857.h"
+   677                           WDTPSH equ 080Fh ;# 
+   678  080F                     # 22711 "C:\xc8\include\pic16f18857.h"
+   679                           WDTTMR equ 0810h ;# 
+   680  0810                     # 22793 "C:\xc8\include\pic16f18857.h"
+   681                           BORCON equ 0811h ;# 
+   682  0811                     # 22820 "C:\xc8\include\pic16f18857.h"
+   683                           VREGCON equ 0812h ;# 
+   684  0812                     # 22841 "C:\xc8\include\pic16f18857.h"
+   685                           PCON0 equ 0813h ;# 
+   686  0813                     # 22903 "C:\xc8\include\pic16f18857.h"
+   687                           CCDCON equ 0814h ;# 
+   688  0814                     # 22936 "C:\xc8\include\pic16f18857.h"
+   689                           NVMADRL equ 081Ah ;# 
+   690  081A                     # 22998 "C:\xc8\include\pic16f18857.h"
+   691                           NVMADRH equ 081Bh ;# 
+   692  081B                     # 23054 "C:\xc8\include\pic16f18857.h"
+   693                           NVMDATL equ 081Ch ;# 
+   694  081C                     # 23116 "C:\xc8\include\pic16f18857.h"
+   695                           NVMDATH equ 081Dh ;# 
+   696  081D                     # 23166 "C:\xc8\include\pic16f18857.h"
+   697                           NVMCON1 equ 081Eh ;# 
+   698  081E                     # 23222 "C:\xc8\include\pic16f18857.h"
+   699                           NVMCON2 equ 081Fh ;# 
+   700  081F                     # 23229 "C:\xc8\include\pic16f18857.h"
+   701                           CPUDOZE equ 088Ch ;# 
+   702  088C                     # 23286 "C:\xc8\include\pic16f18857.h"
+   703                           OSCCON1 equ 088Dh ;# 
+   704  088D                     # 23356 "C:\xc8\include\pic16f18857.h"
+   705                           OSCCON2 equ 088Eh ;# 
+   706  088E                     # 23426 "C:\xc8\include\pic16f18857.h"
+   707                           OSCCON3 equ 088Fh ;# 
+   708  088F                     # 23466 "C:\xc8\include\pic16f18857.h"
+   709                           OSCSTAT equ 0890h ;# 
+   710  0890                     # 23523 "C:\xc8\include\pic16f18857.h"
+   711                           OSCEN equ 0891h ;# 
+   712  0891                     # 23574 "C:\xc8\include\pic16f18857.h"
+   713                           OSCTUNE equ 0892h ;# 
+   714  0892                     # 23632 "C:\xc8\include\pic16f18857.h"
+   715                           OSCFRQ equ 0893h ;# 
+   716  0893                     # 23672 "C:\xc8\include\pic16f18857.h"
+   717                           CLKRCON equ 0895h ;# 
+   718  0895                     # 23737 "C:\xc8\include\pic16f18857.h"
+   719                           CLKRCLK equ 0896h ;# 
+   720  0896                     # 23783 "C:\xc8\include\pic16f18857.h"
+   721                           MDCON0 equ 0897h ;# 
+   722  0897                     # 23823 "C:\xc8\include\pic16f18857.h"
+   723                           MDCON1 equ 0898h ;# 
+   724  0898                     # 23862 "C:\xc8\include\pic16f18857.h"
+   725                           MDSRC equ 0899h ;# 
+   726  0899                     # 23914 "C:\xc8\include\pic16f18857.h"
+   727                           MDCARL equ 089Ah ;# 
+   728  089A                     # 23960 "C:\xc8\include\pic16f18857.h"
+   729                           MDCARH equ 089Bh ;# 
+   730  089B                     # 24006 "C:\xc8\include\pic16f18857.h"
+   731                           FVRCON equ 090Ch ;# 
+   732  090C                     # 24082 "C:\xc8\include\pic16f18857.h"
+   733                           DAC1CON0 equ 090Eh ;# 
+   734  090E                     # 24183 "C:\xc8\include\pic16f18857.h"
+   735                           DAC1CON1 equ 090Fh ;# 
+   736  090F                     # 24235 "C:\xc8\include\pic16f18857.h"
+   737                           ZCDCON equ 091Fh ;# 
+   738  091F                     # 24281 "C:\xc8\include\pic16f18857.h"
+   739                           CMOUT equ 098Fh ;# 
+   740  098F                     # 24286 "C:\xc8\include\pic16f18857.h"
+   741                           CMSTAT equ 098Fh ;# 
+   742  098F                     # 24359 "C:\xc8\include\pic16f18857.h"
+   743                           CM1CON0 equ 0990h ;# 
+   744  0990                     # 24445 "C:\xc8\include\pic16f18857.h"
+   745                           CM1CON1 equ 0991h ;# 
+   746  0991                     # 24485 "C:\xc8\include\pic16f18857.h"
+   747                           CM1NSEL equ 0992h ;# 
+   748  0992                     # 24553 "C:\xc8\include\pic16f18857.h"
+   749                           CM1PSEL equ 0993h ;# 
+   750  0993                     # 24621 "C:\xc8\include\pic16f18857.h"
+   751                           CM2CON0 equ 0994h ;# 
+   752  0994                     # 24707 "C:\xc8\include\pic16f18857.h"
+   753                           CM2CON1 equ 0995h ;# 
+   754  0995                     # 24747 "C:\xc8\include\pic16f18857.h"
+   755                           CM2NSEL equ 0996h ;# 
+   756  0996                     # 24815 "C:\xc8\include\pic16f18857.h"
+   757                           CM2PSEL equ 0997h ;# 
+   758  0997                     # 24883 "C:\xc8\include\pic16f18857.h"
+   759                           CLCDATA equ 01E0Fh ;# 
+   760  1E0F                     # 24921 "C:\xc8\include\pic16f18857.h"
+   761                           CLC1CON equ 01E10h ;# 
+   762  1E10                     # 25039 "C:\xc8\include\pic16f18857.h"
+   763                           CLC1POL equ 01E11h ;# 
+   764  1E11                     # 25117 "C:\xc8\include\pic16f18857.h"
+   765                           CLC1SEL0 equ 01E12h ;# 
+   766  1E12                     # 25245 "C:\xc8\include\pic16f18857.h"
+   767                           CLC1SEL1 equ 01E13h ;# 
+   768  1E13                     # 25373 "C:\xc8\include\pic16f18857.h"
+   769                           CLC1SEL2 equ 01E14h ;# 
+   770  1E14                     # 25501 "C:\xc8\include\pic16f18857.h"
+   771                           CLC1SEL3 equ 01E15h ;# 
+   772  1E15                     # 25629 "C:\xc8\include\pic16f18857.h"
+   773                           CLC1GLS0 equ 01E16h ;# 
+   774  1E16                     # 25741 "C:\xc8\include\pic16f18857.h"
+   775                           CLC1GLS1 equ 01E17h ;# 
+   776  1E17                     # 25853 "C:\xc8\include\pic16f18857.h"
+   777                           CLC1GLS2 equ 01E18h ;# 
+   778  1E18                     # 25965 "C:\xc8\include\pic16f18857.h"
+   779                           CLC1GLS3 equ 01E19h ;# 
+   780  1E19                     # 26077 "C:\xc8\include\pic16f18857.h"
+   781                           CLC2CON equ 01E1Ah ;# 
+   782  1E1A                     # 26195 "C:\xc8\include\pic16f18857.h"
+   783                           CLC2POL equ 01E1Bh ;# 
+   784  1E1B                     # 26273 "C:\xc8\include\pic16f18857.h"
+   785                           CLC2SEL0 equ 01E1Ch ;# 
+   786  1E1C                     # 26401 "C:\xc8\include\pic16f18857.h"
+   787                           CLC2SEL1 equ 01E1Dh ;# 
+   788  1E1D                     # 26529 "C:\xc8\include\pic16f18857.h"
+   789                           CLC2SEL2 equ 01E1Eh ;# 
+   790  1E1E                     # 26657 "C:\xc8\include\pic16f18857.h"
+   791                           CLC2SEL3 equ 01E1Fh ;# 
+   792  1E1F                     # 26785 "C:\xc8\include\pic16f18857.h"
+   793                           CLC2GLS0 equ 01E20h ;# 
+   794  1E20                     # 26897 "C:\xc8\include\pic16f18857.h"
+   795                           CLC2GLS1 equ 01E21h ;# 
+   796  1E21                     # 27009 "C:\xc8\include\pic16f18857.h"
+   797                           CLC2GLS2 equ 01E22h ;# 
+   798  1E22                     # 27121 "C:\xc8\include\pic16f18857.h"
+   799                           CLC2GLS3 equ 01E23h ;# 
+   800  1E23                     # 27233 "C:\xc8\include\pic16f18857.h"
+   801                           CLC3CON equ 01E24h ;# 
+   802  1E24                     # 27351 "C:\xc8\include\pic16f18857.h"
+   803                           CLC3POL equ 01E25h ;# 
+   804  1E25                     # 27429 "C:\xc8\include\pic16f18857.h"
+   805                           CLC3SEL0 equ 01E26h ;# 
+   806  1E26                     # 27557 "C:\xc8\include\pic16f18857.h"
+   807                           CLC3SEL1 equ 01E27h ;# 
+   808  1E27                     # 27685 "C:\xc8\include\pic16f18857.h"
+   809                           CLC3SEL2 equ 01E28h ;# 
+   810  1E28                     # 27813 "C:\xc8\include\pic16f18857.h"
+   811                           CLC3SEL3 equ 01E29h ;# 
+   812  1E29                     # 27941 "C:\xc8\include\pic16f18857.h"
+   813                           CLC3GLS0 equ 01E2Ah ;# 
+   814  1E2A                     # 28053 "C:\xc8\include\pic16f18857.h"
+   815                           CLC3GLS1 equ 01E2Bh ;# 
+   816  1E2B                     # 28165 "C:\xc8\include\pic16f18857.h"
+   817                           CLC3GLS2 equ 01E2Ch ;# 
+   818  1E2C                     # 28277 "C:\xc8\include\pic16f18857.h"
+   819                           CLC3GLS3 equ 01E2Dh ;# 
+   820  1E2D                     # 28389 "C:\xc8\include\pic16f18857.h"
+   821                           CLC4CON equ 01E2Eh ;# 
+   822  1E2E                     # 28507 "C:\xc8\include\pic16f18857.h"
+   823                           CLC4POL equ 01E2Fh ;# 
+   824  1E2F                     # 28585 "C:\xc8\include\pic16f18857.h"
+   825                           CLC4SEL0 equ 01E30h ;# 
+   826  1E30                     # 28713 "C:\xc8\include\pic16f18857.h"
+   827                           CLC4SEL1 equ 01E31h ;# 
+   828  1E31                     # 28841 "C:\xc8\include\pic16f18857.h"
+   829                           CLC4SEL2 equ 01E32h ;# 
+   830  1E32                     # 28969 "C:\xc8\include\pic16f18857.h"
+   831                           CLC4SEL3 equ 01E33h ;# 
+   832  1E33                     # 29097 "C:\xc8\include\pic16f18857.h"
+   833                           CLC4GLS0 equ 01E34h ;# 
+   834  1E34                     # 29209 "C:\xc8\include\pic16f18857.h"
+   835                           CLC4GLS1 equ 01E35h ;# 
+   836  1E35                     # 29321 "C:\xc8\include\pic16f18857.h"
+   837                           CLC4GLS2 equ 01E36h ;# 
+   838  1E36                     # 29433 "C:\xc8\include\pic16f18857.h"
+   839                           CLC4GLS3 equ 01E37h ;# 
+   840  1E37                     # 29545 "C:\xc8\include\pic16f18857.h"
+   841                           PPSLOCK equ 01E8Fh ;# 
+   842  1E8F                     # 29565 "C:\xc8\include\pic16f18857.h"
+   843                           INTPPS equ 01E90h ;# 
+   844  1E90                     # 29611 "C:\xc8\include\pic16f18857.h"
+   845                           T0CKIPPS equ 01E91h ;# 
+   846  1E91                     # 29657 "C:\xc8\include\pic16f18857.h"
+   847                           T1CKIPPS equ 01E92h ;# 
+   848  1E92                     # 29709 "C:\xc8\include\pic16f18857.h"
+   849                           T1GPPS equ 01E93h ;# 
+   850  1E93                     # 29761 "C:\xc8\include\pic16f18857.h"
+   851                           T3CKIPPS equ 01E94h ;# 
+   852  1E94                     # 29813 "C:\xc8\include\pic16f18857.h"
+   853                           T3GPPS equ 01E95h ;# 
+   854  1E95                     # 29865 "C:\xc8\include\pic16f18857.h"
+   855                           T5CKIPPS equ 01E96h ;# 
+   856  1E96                     # 29917 "C:\xc8\include\pic16f18857.h"
+   857                           T5GPPS equ 01E97h ;# 
+   858  1E97                     # 29969 "C:\xc8\include\pic16f18857.h"
+   859                           T2AINPPS equ 01E9Ch ;# 
+   860  1E9C                     # 30021 "C:\xc8\include\pic16f18857.h"
+   861                           T4AINPPS equ 01E9Dh ;# 
+   862  1E9D                     # 30073 "C:\xc8\include\pic16f18857.h"
+   863                           T6AINPPS equ 01E9Eh ;# 
+   864  1E9E                     # 30125 "C:\xc8\include\pic16f18857.h"
+   865                           CCP1PPS equ 01EA1h ;# 
+   866  1EA1                     # 30177 "C:\xc8\include\pic16f18857.h"
+   867                           CCP2PPS equ 01EA2h ;# 
+   868  1EA2                     # 30229 "C:\xc8\include\pic16f18857.h"
+   869                           CCP3PPS equ 01EA3h ;# 
+   870  1EA3                     # 30281 "C:\xc8\include\pic16f18857.h"
+   871                           CCP4PPS equ 01EA4h ;# 
+   872  1EA4                     # 30333 "C:\xc8\include\pic16f18857.h"
+   873                           CCP5PPS equ 01EA5h ;# 
+   874  1EA5                     # 30385 "C:\xc8\include\pic16f18857.h"
+   875                           SMT1WINPPS equ 01EA9h ;# 
+   876  1EA9                     # 30437 "C:\xc8\include\pic16f18857.h"
+   877                           SMT1SIGPPS equ 01EAAh ;# 
+   878  1EAA                     # 30489 "C:\xc8\include\pic16f18857.h"
+   879                           SMT2WINPPS equ 01EABh ;# 
+   880  1EAB                     # 30541 "C:\xc8\include\pic16f18857.h"
+   881                           SMT2SIGPPS equ 01EACh ;# 
+   882  1EAC                     # 30593 "C:\xc8\include\pic16f18857.h"
+   883                           CWG1PPS equ 01EB1h ;# 
+   884  1EB1                     # 30645 "C:\xc8\include\pic16f18857.h"
+   885                           CWG2PPS equ 01EB2h ;# 
+   886  1EB2                     # 30697 "C:\xc8\include\pic16f18857.h"
+   887                           CWG3PPS equ 01EB3h ;# 
+   888  1EB3                     # 30749 "C:\xc8\include\pic16f18857.h"
+   889                           MDCARLPPS equ 01EB8h ;# 
+   890  1EB8                     # 30801 "C:\xc8\include\pic16f18857.h"
+   891                           MDCARHPPS equ 01EB9h ;# 
+   892  1EB9                     # 30853 "C:\xc8\include\pic16f18857.h"
+   893                           MDSRCPPS equ 01EBAh ;# 
+   894  1EBA                     # 30905 "C:\xc8\include\pic16f18857.h"
+   895                           CLCIN0PPS equ 01EBBh ;# 
+   896  1EBB                     # 30957 "C:\xc8\include\pic16f18857.h"
+   897                           CLCIN1PPS equ 01EBCh ;# 
+   898  1EBC                     # 31009 "C:\xc8\include\pic16f18857.h"
+   899                           CLCIN2PPS equ 01EBDh ;# 
+   900  1EBD                     # 31061 "C:\xc8\include\pic16f18857.h"
+   901                           CLCIN3PPS equ 01EBEh ;# 
+   902  1EBE                     # 31113 "C:\xc8\include\pic16f18857.h"
+   903                           ADCACTPPS equ 01EC3h ;# 
+   904  1EC3                     # 31165 "C:\xc8\include\pic16f18857.h"
+   905                           SSP1CLKPPS equ 01EC5h ;# 
+   906  1EC5                     # 31217 "C:\xc8\include\pic16f18857.h"
+   907                           SSP1DATPPS equ 01EC6h ;# 
+   908  1EC6                     # 31269 "C:\xc8\include\pic16f18857.h"
+   909                           SSP1SSPPS equ 01EC7h ;# 
+   910  1EC7                     # 31321 "C:\xc8\include\pic16f18857.h"
+   911                           SSP2CLKPPS equ 01EC8h ;# 
+   912  1EC8                     # 31373 "C:\xc8\include\pic16f18857.h"
+   913                           SSP2DATPPS equ 01EC9h ;# 
+   914  1EC9                     # 31425 "C:\xc8\include\pic16f18857.h"
+   915                           SSP2SSPPS equ 01ECAh ;# 
+   916  1ECA                     # 31477 "C:\xc8\include\pic16f18857.h"
+   917                           RXPPS equ 01ECBh ;# 
+   918  1ECB                     # 31529 "C:\xc8\include\pic16f18857.h"
+   919                           TXPPS equ 01ECCh ;# 
+   920  1ECC                     # 31581 "C:\xc8\include\pic16f18857.h"
+   921                           RA0PPS equ 01F10h ;# 
+   922  1F10                     # 31631 "C:\xc8\include\pic16f18857.h"
+   923                           RA1PPS equ 01F11h ;# 
+   924  1F11                     # 31681 "C:\xc8\include\pic16f18857.h"
+   925                           RA2PPS equ 01F12h ;# 
+   926  1F12                     # 31731 "C:\xc8\include\pic16f18857.h"
+   927                           RA3PPS equ 01F13h ;# 
+   928  1F13                     # 31781 "C:\xc8\include\pic16f18857.h"
+   929                           RA4PPS equ 01F14h ;# 
+   930  1F14                     # 31831 "C:\xc8\include\pic16f18857.h"
+   931                           RA5PPS equ 01F15h ;# 
+   932  1F15                     # 31881 "C:\xc8\include\pic16f18857.h"
+   933                           RA6PPS equ 01F16h ;# 
+   934  1F16                     # 31931 "C:\xc8\include\pic16f18857.h"
+   935                           RA7PPS equ 01F17h ;# 
+   936  1F17                     # 31981 "C:\xc8\include\pic16f18857.h"
+   937                           RB0PPS equ 01F18h ;# 
+   938  1F18                     # 32031 "C:\xc8\include\pic16f18857.h"
+   939                           RB1PPS equ 01F19h ;# 
+   940  1F19                     # 32081 "C:\xc8\include\pic16f18857.h"
+   941                           RB2PPS equ 01F1Ah ;# 
+   942  1F1A                     # 32131 "C:\xc8\include\pic16f18857.h"
+   943                           RB3PPS equ 01F1Bh ;# 
+   944  1F1B                     # 32181 "C:\xc8\include\pic16f18857.h"
+   945                           RB4PPS equ 01F1Ch ;# 
+   946  1F1C                     # 32231 "C:\xc8\include\pic16f18857.h"
+   947                           RB5PPS equ 01F1Dh ;# 
+   948  1F1D                     # 32281 "C:\xc8\include\pic16f18857.h"
+   949                           RB6PPS equ 01F1Eh ;# 
+   950  1F1E                     # 32331 "C:\xc8\include\pic16f18857.h"
+   951                           RB7PPS equ 01F1Fh ;# 
+   952  1F1F                     # 32381 "C:\xc8\include\pic16f18857.h"
+   953                           RC0PPS equ 01F20h ;# 
+   954  1F20                     # 32431 "C:\xc8\include\pic16f18857.h"
+   955                           RC1PPS equ 01F21h ;# 
+   956  1F21                     # 32481 "C:\xc8\include\pic16f18857.h"
+   957                           RC2PPS equ 01F22h ;# 
+   958  1F22                     # 32531 "C:\xc8\include\pic16f18857.h"
+   959                           RC3PPS equ 01F23h ;# 
+   960  1F23                     # 32581 "C:\xc8\include\pic16f18857.h"
+   961                           RC4PPS equ 01F24h ;# 
+   962  1F24                     # 32631 "C:\xc8\include\pic16f18857.h"
+   963                           RC5PPS equ 01F25h ;# 
+   964  1F25                     # 32681 "C:\xc8\include\pic16f18857.h"
+   965                           RC6PPS equ 01F26h ;# 
+   966  1F26                     # 32731 "C:\xc8\include\pic16f18857.h"
+   967                           RC7PPS equ 01F27h ;# 
+   968  1F27                     # 32781 "C:\xc8\include\pic16f18857.h"
+   969                           ANSELA equ 01F38h ;# 
+   970  1F38                     # 32843 "C:\xc8\include\pic16f18857.h"
+   971                           WPUA equ 01F39h ;# 
+   972  1F39                     # 32905 "C:\xc8\include\pic16f18857.h"
+   973                           ODCONA equ 01F3Ah ;# 
+   974  1F3A                     # 32967 "C:\xc8\include\pic16f18857.h"
+   975                           SLRCONA equ 01F3Bh ;# 
+   976  1F3B                     # 33029 "C:\xc8\include\pic16f18857.h"
+   977                           INLVLA equ 01F3Ch ;# 
+   978  1F3C                     # 33091 "C:\xc8\include\pic16f18857.h"
+   979                           IOCAP equ 01F3Dh ;# 
+   980  1F3D                     # 33153 "C:\xc8\include\pic16f18857.h"
+   981                           IOCAN equ 01F3Eh ;# 
+   982  1F3E                     # 33215 "C:\xc8\include\pic16f18857.h"
+   983                           IOCAF equ 01F3Fh ;# 
+   984  1F3F                     # 33277 "C:\xc8\include\pic16f18857.h"
+   985                           CCDNA equ 01F40h ;# 
+   986  1F40                     # 33339 "C:\xc8\include\pic16f18857.h"
+   987                           CCDPA equ 01F41h ;# 
+   988  1F41                     # 33401 "C:\xc8\include\pic16f18857.h"
+   989                           ANSELB equ 01F43h ;# 
+   990  1F43                     # 33463 "C:\xc8\include\pic16f18857.h"
+   991                           WPUB equ 01F44h ;# 
+   992  1F44                     # 33525 "C:\xc8\include\pic16f18857.h"
+   993                           ODCONB equ 01F45h ;# 
+   994  1F45                     # 33587 "C:\xc8\include\pic16f18857.h"
+   995                           SLRCONB equ 01F46h ;# 
+   996  1F46                     # 33649 "C:\xc8\include\pic16f18857.h"
+   997                           INLVLB equ 01F47h ;# 
+   998  1F47                     # 33711 "C:\xc8\include\pic16f18857.h"
+   999                           IOCBP equ 01F48h ;# 
+  1000  1F48                     # 33773 "C:\xc8\include\pic16f18857.h"
+  1001                           IOCBN equ 01F49h ;# 
+  1002  1F49                     # 33835 "C:\xc8\include\pic16f18857.h"
+  1003                           IOCBF equ 01F4Ah ;# 
+  1004  1F4A                     # 33897 "C:\xc8\include\pic16f18857.h"
+  1005                           CCDNB equ 01F4Bh ;# 
+  1006  1F4B                     # 33959 "C:\xc8\include\pic16f18857.h"
+  1007                           CCDPB equ 01F4Ch ;# 
+  1008  1F4C                     # 34021 "C:\xc8\include\pic16f18857.h"
+  1009                           ANSELC equ 01F4Eh ;# 
+  1010  1F4E                     # 34083 "C:\xc8\include\pic16f18857.h"
+  1011                           WPUC equ 01F4Fh ;# 
+  1012  1F4F                     # 34145 "C:\xc8\include\pic16f18857.h"
+  1013                           ODCONC equ 01F50h ;# 
+  1014  1F50                     # 34207 "C:\xc8\include\pic16f18857.h"
+  1015                           SLRCONC equ 01F51h ;# 
+  1016  1F51                     # 34269 "C:\xc8\include\pic16f18857.h"
+  1017                           INLVLC equ 01F52h ;# 
+  1018  1F52                     # 34331 "C:\xc8\include\pic16f18857.h"
+  1019                           IOCCP equ 01F53h ;# 
+  1020  1F53                     # 34393 "C:\xc8\include\pic16f18857.h"
+  1021                           IOCCN equ 01F54h ;# 
+  1022  1F54                     # 34455 "C:\xc8\include\pic16f18857.h"
+  1023                           IOCCF equ 01F55h ;# 
+  1024  1F55                     # 34517 "C:\xc8\include\pic16f18857.h"
+  1025                           CCDNC equ 01F56h ;# 
+  1026  1F56                     # 34579 "C:\xc8\include\pic16f18857.h"
+  1027                           CCDPC equ 01F57h ;# 
+  1028  1F57                     # 34641 "C:\xc8\include\pic16f18857.h"
+  1029                           WPUE equ 01F65h ;# 
+  1030  1F65                     # 34673 "C:\xc8\include\pic16f18857.h"
+  1031                           INLVLE equ 01F68h ;# 
+  1032  1F68                     # 34705 "C:\xc8\include\pic16f18857.h"
+  1033                           IOCEP equ 01F69h ;# 
+  1034  1F69                     # 34726 "C:\xc8\include\pic16f18857.h"
+  1035                           IOCEN equ 01F6Ah ;# 
+  1036  1F6A                     # 34747 "C:\xc8\include\pic16f18857.h"
+  1037                           IOCEF equ 01F6Bh ;# 
+  1038  1F6B                     # 34768 "C:\xc8\include\pic16f18857.h"
+  1039                           STATUS_SHAD equ 01FE4h ;# 
+  1040  1FE4                     # 34800 "C:\xc8\include\pic16f18857.h"
+  1041                           WREG_SHAD equ 01FE5h ;# 
+  1042  1FE5                     # 34820 "C:\xc8\include\pic16f18857.h"
+  1043                           BSR_SHAD equ 01FE6h ;# 
+  1044  1FE6                     # 34840 "C:\xc8\include\pic16f18857.h"
+  1045                           PCLATH_SHAD equ 01FE7h ;# 
+  1046  1FE7                     # 34860 "C:\xc8\include\pic16f18857.h"
+  1047                           FSR0L_SHAD equ 01FE8h ;# 
+  1048  1FE8                     # 34880 "C:\xc8\include\pic16f18857.h"
+  1049                           FSR0H_SHAD equ 01FE9h ;# 
+  1050  1FE9                     # 34900 "C:\xc8\include\pic16f18857.h"
+  1051                           FSR1L_SHAD equ 01FEAh ;# 
+  1052  1FEA                     # 34920 "C:\xc8\include\pic16f18857.h"
+  1053                           FSR1H_SHAD equ 01FEBh ;# 
+  1054  1FEB                     # 34940 "C:\xc8\include\pic16f18857.h"
+  1055                           STKPTR equ 01FEDh ;# 
+  1056  1FED                     # 34960 "C:\xc8\include\pic16f18857.h"
+  1057                           TOSL equ 01FEEh ;# 
+  1058  1FEE                     # 34980 "C:\xc8\include\pic16f18857.h"
+  1059                           TOSH equ 01FEFh ;# 
+  1060  1FEF                     	FNCALL	_main,_ledcheck
+  1061                           	FNROOT	_main
+  1062                           	global	_analog_reading
+  1063                           	global	_PORTCbits
+  1064                           _PORTCbits	set	0xE
+  1065  000E                     	global	_PORTC
+  1066                           _PORTC	set	0xE
+  1067  000E                     	global	_PORTB
+  1068                           _PORTB	set	0xD
+  1069  000D                     	global	_TRISC
+  1070                           _TRISC	set	0x13
+  1071  0013                     	global	_TRISB
+  1072                           _TRISB	set	0x12
+  1073  0012                     	global	_TRISA
+  1074                           _TRISA	set	0x11
+  1075  0011                     	global	_PORTBbits
+  1076                           _PORTBbits	set	0xD
+  1077  000D                     	global	_ADCON2
+  1078                           _ADCON2	set	0x95
+  1079  0095                     	global	_ADCON1
+  1080                           _ADCON1	set	0x94
+  1081  0094                     	global	_ADRESH
+  1082                           _ADRESH	set	0x8D
+  1083  008D                     	global	_ADRESL
+  1084                           _ADRESL	set	0x8C
+  1085  008C                     	global	_ADCON0bits
+  1086                           _ADCON0bits	set	0x93
+  1087  0093                     ; #config settings
+  1088                           global __CFG_FEXTOSC$ECH
+  1089                           __CFG_FEXTOSC$ECH equ 0x0
+  1090  0000                     global __CFG_RSTOSC$EXT1X
+  1091                           __CFG_RSTOSC$EXT1X equ 0x0
+  1092  0000                     global __CFG_CLKOUTEN$OFF
+  1093                           __CFG_CLKOUTEN$OFF equ 0x0
+  1094  0000                     global __CFG_CSWEN$ON
+  1095                           __CFG_CSWEN$ON equ 0x0
+  1096  0000                     global __CFG_FCMEN$ON
+  1097                           __CFG_FCMEN$ON equ 0x0
+  1098  0000                     global __CFG_MCLRE$ON
+  1099                           __CFG_MCLRE$ON equ 0x0
+  1100  0000                     global __CFG_PWRTE$OFF
+  1101                           __CFG_PWRTE$OFF equ 0x0
+  1102  0000                     global __CFG_LPBOREN$OFF
+  1103                           __CFG_LPBOREN$OFF equ 0x0
+  1104  0000                     global __CFG_BOREN$ON
+  1105                           __CFG_BOREN$ON equ 0x0
+  1106  0000                     global __CFG_BORV$LO
+  1107                           __CFG_BORV$LO equ 0x0
+  1108  0000                     global __CFG_ZCD$OFF
+  1109                           __CFG_ZCD$OFF equ 0x0
+  1110  0000                     global __CFG_PPS1WAY$ON
+  1111                           __CFG_PPS1WAY$ON equ 0x0
+  1112  0000                     global __CFG_STVREN$ON
+  1113                           __CFG_STVREN$ON equ 0x0
+  1114  0000                     global __CFG_WDTCPS$WDTCPS_31
+  1115                           __CFG_WDTCPS$WDTCPS_31 equ 0x0
+  1116  0000                     global __CFG_WDTE$ON
+  1117                           __CFG_WDTE$ON equ 0x0
+  1118  0000                     global __CFG_WDTCWS$WDTCWS_7
+  1119                           __CFG_WDTCWS$WDTCWS_7 equ 0x0
+  1120  0000                     global __CFG_WDTCCS$SC
+  1121                           __CFG_WDTCCS$SC equ 0x0
+  1122  0000                     global __CFG_WRT$OFF
+  1123                           __CFG_WRT$OFF equ 0x0
+  1124  0000                     global __CFG_SCANE$available
+  1125                           __CFG_SCANE$available equ 0x0
+  1126  0000                     global __CFG_LVP$ON
+  1127                           __CFG_LVP$ON equ 0x0
+  1128  0000                     global __CFG_CP$OFF
+  1129                           __CFG_CP$OFF equ 0x0
+  1130  0000                     global __CFG_CPD$OFF
+  1131                           __CFG_CPD$OFF equ 0x0
+  1132  0000                     	file	"C:\Users\farsh\AppData\Local\Temp\sc7k."
+  1133                           	line	#
+  1134                           psect cinit,class=CODE,delta=2
+  1135                           global start_initialization
+  1136                           start_initialization:
+  1137  07FB                     
+  1138                           global __initialization
+  1139                           __initialization:
+  1140  07FB                     psect	bssCOMMON,class=COMMON,space=1,noexec
+  1141                           global __pbssCOMMON
+  1142                           __pbssCOMMON:
+  1143  0076                     _analog_reading:
+  1144  0076                            ds      2
+  1145  0076                     
+  1146                           	file	"C:\Users\farsh\AppData\Local\Temp\sc7k."
+  1147                           	line	#
+  1148                           ; Clear objects allocated to COMMON
+  1149                           psect cinit,class=CODE,delta=2,merge=1
+  1150                           	global __pbssCOMMON
+  1151                           	clrf	((__pbssCOMMON)+0)&07Fh
+  1152  07FB  01F6               	clrf	((__pbssCOMMON)+1)&07Fh
+  1153  07FC  01F7               psect cinit,class=CODE,delta=2,merge=1
+  1154                           global end_of_initialization,__end_of__initialization
+  1155                           
+  1156                           ;End of C runtime variable initialization code
+  1157                           
+  1158                           end_of_initialization:
+  1159  07FD                     __end_of__initialization:
+  1160  07FD                     movlb 0
+  1161  07FD  0140               ljmp _main	;jump to C main() function
+  1162  07FE  3187  2F79         psect	cstackCOMMON,class=COMMON,space=1,noexec
+  1163                           global __pcstackCOMMON
+  1164                           __pcstackCOMMON:
+  1165  0070                     ?_ledcheck:	; 1 bytes @ 0x0
+  1166  0070                     ??_ledcheck:	; 1 bytes @ 0x0
+  1167  0070                     ?_main:	; 1 bytes @ 0x0
+  1168  0070                     	ds	1
+  1169  0070                     ??_main:	; 1 bytes @ 0x1
+  1170  0071                     	ds	1
+  1171  0071                     	global	main@i
+  1172                           main@i:	; 2 bytes @ 0x2
+  1173  0072                     	ds	2
+  1174  0072                     	global	main@i_162
+  1175                           main@i_162:	; 2 bytes @ 0x4
+  1176  0074                     	ds	2
+  1177  0074                     ;!
+  1178                           ;!Data Sizes:
+  1179                           ;!    Strings     0
+  1180                           ;!    Constant    0
+  1181                           ;!    Data        0
+  1182                           ;!    BSS         2
+  1183                           ;!    Persistent  0
+  1184                           ;!    Stack       0
+  1185                           ;!
+  1186                           ;!Auto Spaces:
+  1187                           ;!    Space          Size  Autos    Used
+  1188                           ;!    COMMON           14      6       8
+  1189                           ;!    BANK0            80      0       0
+  1190                           ;!    BANK1            80      0       0
+  1191                           ;!    BANK2            80      0       0
+  1192                           ;!    BANK3            80      0       0
+  1193                           ;!    BANK4            80      0       0
+  1194                           ;!    BANK5            80      0       0
+  1195                           ;!    BANK6            80      0       0
+  1196                           ;!    BANK7            80      0       0
+  1197                           ;!    BANK8            80      0       0
+  1198                           ;!    BANK9            80      0       0
+  1199                           ;!    BANK10           80      0       0
+  1200                           ;!    BANK11           80      0       0
+  1201                           ;!    BANK12           80      0       0
+  1202                           ;!    BANK13           80      0       0
+  1203                           ;!    BANK14           80      0       0
+  1204                           ;!    BANK15           80      0       0
+  1205                           ;!    BANK16           80      0       0
+  1206                           ;!    BANK17           80      0       0
+  1207                           ;!    BANK18           80      0       0
+  1208                           ;!    BANK19           80      0       0
+  1209                           ;!    BANK20           80      0       0
+  1210                           ;!    BANK21           80      0       0
+  1211                           ;!    BANK22           80      0       0
+  1212                           ;!    BANK23           80      0       0
+  1213                           ;!    BANK24           80      0       0
+  1214                           ;!    BANK25           80      0       0
+  1215                           ;!    BANK26           80      0       0
+  1216                           ;!    BANK27           80      0       0
+  1217                           ;!    BANK28           80      0       0
+  1218                           ;!    BANK29           80      0       0
+  1219                           ;!    BANK30           80      0       0
+  1220                           ;!    BANK31           80      0       0
+  1221                           ;!    BANK32           80      0       0
+  1222                           ;!    BANK33           80      0       0
+  1223                           ;!    BANK34           80      0       0
+  1224                           ;!    BANK35           80      0       0
+  1225                           ;!    BANK36           80      0       0
+  1226                           ;!    BANK37           80      0       0
+  1227                           ;!    BANK38           80      0       0
+  1228                           ;!    BANK39           80      0       0
+  1229                           ;!    BANK40           80      0       0
+  1230                           ;!    BANK41           80      0       0
+  1231                           ;!    BANK42           80      0       0
+  1232                           ;!    BANK43           80      0       0
+  1233                           ;!    BANK44           80      0       0
+  1234                           ;!    BANK45           80      0       0
+  1235                           ;!    BANK46           80      0       0
+  1236                           ;!    BANK47           80      0       0
+  1237                           ;!    BANK48           80      0       0
+  1238                           ;!    BANK49           80      0       0
+  1239                           ;!    BANK50           80      0       0
+  1240                           
+  1241                           ;!
+  1242                           ;!Pointer List with Targets:
+  1243                           ;!
+  1244                           ;!    None.
+  1245                           
+  1246                           
+  1247                           ;!
+  1248                           ;!Critical Paths under _main in COMMON
+  1249                           ;!
+  1250                           ;!    _main->_ledcheck
+  1251                           ;!
+  1252                           ;!Critical Paths under _main in BANK0
+  1253                           ;!
+  1254                           ;!    None.
+  1255                           ;!
+  1256                           ;!Critical Paths under _main in BANK1
+  1257                           ;!
+  1258                           ;!    None.
+  1259                           ;!
+  1260                           ;!Critical Paths under _main in BANK2
+  1261                           ;!
+  1262                           ;!    None.
+  1263                           ;!
+  1264                           ;!Critical Paths under _main in BANK3
+  1265                           ;!
+  1266                           ;!    None.
+  1267                           ;!
+  1268                           ;!Critical Paths under _main in BANK4
+  1269                           ;!
+  1270                           ;!    None.
+  1271                           ;!
+  1272                           ;!Critical Paths under _main in BANK5
+  1273                           ;!
+  1274                           ;!    None.
+  1275                           ;!
+  1276                           ;!Critical Paths under _main in BANK6
+  1277                           ;!
+  1278                           ;!    None.
+  1279                           ;!
+  1280                           ;!Critical Paths under _main in BANK7
+  1281                           ;!
+  1282                           ;!    None.
+  1283                           ;!
+  1284                           ;!Critical Paths under _main in BANK8
+  1285                           ;!
+  1286                           ;!    None.
+  1287                           ;!
+  1288                           ;!Critical Paths under _main in BANK9
+  1289                           ;!
+  1290                           ;!    None.
+  1291                           ;!
+  1292                           ;!Critical Paths under _main in BANK10
+  1293                           ;!
+  1294                           ;!    None.
+  1295                           ;!
+  1296                           ;!Critical Paths under _main in BANK11
+  1297                           ;!
+  1298                           ;!    None.
+  1299                           ;!
+  1300                           ;!Critical Paths under _main in BANK12
+  1301                           ;!
+  1302                           ;!    None.
+  1303                           ;!
+  1304                           ;!Critical Paths under _main in BANK13
+  1305                           ;!
+  1306                           ;!    None.
+  1307                           ;!
+  1308                           ;!Critical Paths under _main in BANK14
+  1309                           ;!
+  1310                           ;!    None.
+  1311                           ;!
+  1312                           ;!Critical Paths under _main in BANK15
+  1313                           ;!
+  1314                           ;!    None.
+  1315                           ;!
+  1316                           ;!Critical Paths under _main in BANK16
+  1317                           ;!
+  1318                           ;!    None.
+  1319                           ;!
+  1320                           ;!Critical Paths under _main in BANK17
+  1321                           ;!
+  1322                           ;!    None.
+  1323                           ;!
+  1324                           ;!Critical Paths under _main in BANK18
+  1325                           ;!
+  1326                           ;!    None.
+  1327                           ;!
+  1328                           ;!Critical Paths under _main in BANK19
+  1329                           ;!
+  1330                           ;!    None.
+  1331                           ;!
+  1332                           ;!Critical Paths under _main in BANK20
+  1333                           ;!
+  1334                           ;!    None.
+  1335                           ;!
+  1336                           ;!Critical Paths under _main in BANK21
+  1337                           ;!
+  1338                           ;!    None.
+  1339                           ;!
+  1340                           ;!Critical Paths under _main in BANK22
+  1341                           ;!
+  1342                           ;!    None.
+  1343                           ;!
+  1344                           ;!Critical Paths under _main in BANK23
+  1345                           ;!
+  1346                           ;!    None.
+  1347                           ;!
+  1348                           ;!Critical Paths under _main in BANK24
+  1349                           ;!
+  1350                           ;!    None.
+  1351                           ;!
+  1352                           ;!Critical Paths under _main in BANK25
+  1353                           ;!
+  1354                           ;!    None.
+  1355                           ;!
+  1356                           ;!Critical Paths under _main in BANK26
+  1357                           ;!
+  1358                           ;!    None.
+  1359                           ;!
+  1360                           ;!Critical Paths under _main in BANK27
+  1361                           ;!
+  1362                           ;!    None.
+  1363                           ;!
+  1364                           ;!Critical Paths under _main in BANK28
+  1365                           ;!
+  1366                           ;!    None.
+  1367                           ;!
+  1368                           ;!Critical Paths under _main in BANK29
+  1369                           ;!
+  1370                           ;!    None.
+  1371                           ;!
+  1372                           ;!Critical Paths under _main in BANK30
+  1373                           ;!
+  1374                           ;!    None.
+  1375                           ;!
+  1376                           ;!Critical Paths under _main in BANK31
+  1377                           ;!
+  1378                           ;!    None.
+  1379                           ;!
+  1380                           ;!Critical Paths under _main in BANK32
+  1381                           ;!
+  1382                           ;!    None.
+  1383                           ;!
+  1384                           ;!Critical Paths under _main in BANK33
+  1385                           ;!
+  1386                           ;!    None.
+  1387                           ;!
+  1388                           ;!Critical Paths under _main in BANK34
+  1389                           ;!
+  1390                           ;!    None.
+  1391                           ;!
+  1392                           ;!Critical Paths under _main in BANK35
+  1393                           ;!
+  1394                           ;!    None.
+  1395                           ;!
+  1396                           ;!Critical Paths under _main in BANK36
+  1397                           ;!
+  1398                           ;!    None.
+  1399                           ;!
+  1400                           ;!Critical Paths under _main in BANK37
+  1401                           ;!
+  1402                           ;!    None.
+  1403                           ;!
+  1404                           ;!Critical Paths under _main in BANK38
+  1405                           ;!
+  1406                           ;!    None.
+  1407                           ;!
+  1408                           ;!Critical Paths under _main in BANK39
+  1409                           ;!
+  1410                           ;!    None.
+  1411                           ;!
+  1412                           ;!Critical Paths under _main in BANK40
+  1413                           ;!
+  1414                           ;!    None.
+  1415                           ;!
+  1416                           ;!Critical Paths under _main in BANK41
+  1417                           ;!
+  1418                           ;!    None.
+  1419                           ;!
+  1420                           ;!Critical Paths under _main in BANK42
+  1421                           ;!
+  1422                           ;!    None.
+  1423                           ;!
+  1424                           ;!Critical Paths under _main in BANK43
+  1425                           ;!
+  1426                           ;!    None.
+  1427                           ;!
+  1428                           ;!Critical Paths under _main in BANK44
+  1429                           ;!
+  1430                           ;!    None.
+  1431                           ;!
+  1432                           ;!Critical Paths under _main in BANK45
+  1433                           ;!
+  1434                           ;!    None.
+  1435                           ;!
+  1436                           ;!Critical Paths under _main in BANK46
+  1437                           ;!
+  1438                           ;!    None.
+  1439                           ;!
+  1440                           ;!Critical Paths under _main in BANK47
+  1441                           ;!
+  1442                           ;!    None.
+  1443                           ;!
+  1444                           ;!Critical Paths under _main in BANK48
+  1445                           ;!
+  1446                           ;!    None.
+  1447                           ;!
+  1448                           ;!Critical Paths under _main in BANK49
+  1449                           ;!
+  1450                           ;!    None.
+  1451                           ;!
+  1452                           ;!Critical Paths under _main in BANK50
+  1453                           ;!
+  1454                           ;!    None.
+  1455                           
+  1456 ;;
+  1457 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+  1458 ;;
+  1459                           
+  1460                           ;!
+  1461                           ;!Call Graph Tables:
+  1462                           ;!
+  1463                           ;! ---------------------------------------------------------------------------------
+  1464                           ;! (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+  1465                           ;! ---------------------------------------------------------------------------------
+  1466                           ;! (0) _main                                                 5     5      0      60
+  1467                           ;!                                              1 COMMON     5     5      0
+  1468                           ;!                           _ledcheck
+  1469                           ;! ---------------------------------------------------------------------------------
+  1470                           ;! (1) _ledcheck                                             1     1      0       0
+  1471                           ;!                                              0 COMMON     1     1      0
+  1472                           ;! ---------------------------------------------------------------------------------
+  1473                           ;! Estimated maximum stack depth 1
+  1474                           ;! ---------------------------------------------------------------------------------
+  1475                           ;!
+  1476                           ;! Call Graph Graphs:
+  1477                           ;!
+  1478                           ;! _main (ROOT)
+  1479                           ;!   _ledcheck
+  1480                           ;!
+  1481                           
+  1482                           ;! Address spaces:
+  1483                           
+  1484                           ;!Name               Size   Autos  Total    Cost      Usage
+  1485                           ;!BIGRAM             FF0      0       0       0        0.0%
+  1486                           ;!EEDATA             100      0       0       0        0.0%
+  1487                           ;!NULL                 0      0       0       0        0.0%
+  1488                           ;!CODE                 0      0       0       0        0.0%
+  1489                           ;!BITCOMMON            E      0       0       1        0.0%
+  1490                           ;!BITSFR0              0      0       0       1        0.0%
+  1491                           ;!SFR0                 0      0       0       1        0.0%
+  1492                           ;!COMMON               E      6       8       2       57.1%
+  1493                           ;!BITSFR1              0      0       0       2        0.0%
+  1494                           ;!SFR1                 0      0       0       2        0.0%
+  1495                           ;!BITSFR2              0      0       0       3        0.0%
+  1496                           ;!SFR2                 0      0       0       3        0.0%
+  1497                           ;!STACK                0      0       0       3        0.0%
+  1498                           ;!BITBANK0            50      0       0       4        0.0%
+  1499                           ;!BITSFR3              0      0       0       4        0.0%
+  1500                           ;!SFR3                 0      0       0       4        0.0%
+  1501                           ;!BANK0               50      0       0       5        0.0%
+  1502                           ;!BITSFR4              0      0       0       5        0.0%
+  1503                           ;!SFR4                 0      0       0       5        0.0%
+  1504                           ;!BITBANK1            50      0       0       6        0.0%
+  1505                           ;!BITSFR5              0      0       0       6        0.0%
+  1506                           ;!SFR5                 0      0       0       6        0.0%
+  1507                           ;!BANK1               50      0       0       7        0.0%
+  1508                           ;!BITSFR6              0      0       0       7        0.0%
+  1509                           ;!SFR6                 0      0       0       7        0.0%
+  1510                           ;!BITBANK2            50      0       0       8        0.0%
+  1511                           ;!BITSFR7              0      0       0       8        0.0%
+  1512                           ;!SFR7                 0      0       0       8        0.0%
+  1513                           ;!BANK2               50      0       0       9        0.0%
+  1514                           ;!BITSFR8              0      0       0       9        0.0%
+  1515                           ;!SFR8                 0      0       0       9        0.0%
+  1516                           ;!BITBANK3            50      0       0      10        0.0%
+  1517                           ;!BITSFR9              0      0       0      10        0.0%
+  1518                           ;!SFR9                 0      0       0      10        0.0%
+  1519                           ;!BANK3               50      0       0      11        0.0%
+  1520                           ;!BITSFR10             0      0       0      11        0.0%
+  1521                           ;!SFR10                0      0       0      11        0.0%
+  1522                           ;!BITBANK4            50      0       0      12        0.0%
+  1523                           ;!BITSFR11             0      0       0      12        0.0%
+  1524                           ;!SFR11                0      0       0      12        0.0%
+  1525                           ;!BANK4               50      0       0      13        0.0%
+  1526                           ;!BITSFR12             0      0       0      13        0.0%
+  1527                           ;!SFR12                0      0       0      13        0.0%
+  1528                           ;!BITBANK5            50      0       0      14        0.0%
+  1529                           ;!BITSFR13             0      0       0      14        0.0%
+  1530                           ;!SFR13                0      0       0      14        0.0%
+  1531                           ;!BANK5               50      0       0      15        0.0%
+  1532                           ;!BITSFR14             0      0       0      15        0.0%
+  1533                           ;!SFR14                0      0       0      15        0.0%
+  1534                           ;!BITBANK6            50      0       0      16        0.0%
+  1535                           ;!BITSFR15             0      0       0      16        0.0%
+  1536                           ;!SFR15                0      0       0      16        0.0%
+  1537                           ;!BANK6               50      0       0      17        0.0%
+  1538                           ;!BITSFR16             0      0       0      17        0.0%
+  1539                           ;!SFR16                0      0       0      17        0.0%
+  1540                           ;!BITBANK7            50      0       0      18        0.0%
+  1541                           ;!BITSFR17             0      0       0      18        0.0%
+  1542                           ;!SFR17                0      0       0      18        0.0%
+  1543                           ;!BANK7               50      0       0      19        0.0%
+  1544                           ;!BITSFR18             0      0       0      19        0.0%
+  1545                           ;!SFR18                0      0       0      19        0.0%
+  1546                           ;!BITBANK8            50      0       0      20        0.0%
+  1547                           ;!BITSFR19             0      0       0      20        0.0%
+  1548                           ;!SFR19                0      0       0      20        0.0%
+  1549                           ;!BANK8               50      0       0      21        0.0%
+  1550                           ;!BITSFR20             0      0       0      21        0.0%
+  1551                           ;!SFR20                0      0       0      21        0.0%
+  1552                           ;!BITBANK9            50      0       0      22        0.0%
+  1553                           ;!BITSFR21             0      0       0      22        0.0%
+  1554                           ;!SFR21                0      0       0      22        0.0%
+  1555                           ;!BANK9               50      0       0      23        0.0%
+  1556                           ;!BITSFR22             0      0       0      23        0.0%
+  1557                           ;!SFR22                0      0       0      23        0.0%
+  1558                           ;!BITBANK10           50      0       0      24        0.0%
+  1559                           ;!BITSFR23             0      0       0      24        0.0%
+  1560                           ;!SFR23                0      0       0      24        0.0%
+  1561                           ;!BANK10              50      0       0      25        0.0%
+  1562                           ;!BITSFR24             0      0       0      25        0.0%
+  1563                           ;!SFR24                0      0       0      25        0.0%
+  1564                           ;!BITBANK11           50      0       0      26        0.0%
+  1565                           ;!BITSFR25             0      0       0      26        0.0%
+  1566                           ;!SFR25                0      0       0      26        0.0%
+  1567                           ;!BANK11              50      0       0      27        0.0%
+  1568                           ;!BITSFR26             0      0       0      27        0.0%
+  1569                           ;!SFR26                0      0       0      27        0.0%
+  1570                           ;!BITSFR27             0      0       0      28        0.0%
+  1571                           ;!SFR27                0      0       0      28        0.0%
+  1572                           ;!ABS                  0      0       8      28        0.0%
+  1573                           ;!BITBANK12           50      0       0      29        0.0%
+  1574                           ;!BITSFR28             0      0       0      29        0.0%
+  1575                           ;!SFR28                0      0       0      29        0.0%
+  1576                           ;!BANK12              50      0       0      30        0.0%
+  1577                           ;!BITSFR29             0      0       0      30        0.0%
+  1578                           ;!SFR29                0      0       0      30        0.0%
+  1579                           ;!BITBANK13           50      0       0      31        0.0%
+  1580                           ;!BITSFR30             0      0       0      31        0.0%
+  1581                           ;!SFR30                0      0       0      31        0.0%
+  1582                           ;!BANK13              50      0       0      32        0.0%
+  1583                           ;!BITSFR31             0      0       0      32        0.0%
+  1584                           ;!SFR31                0      0       0      32        0.0%
+  1585                           ;!BITBANK14           50      0       0      33        0.0%
+  1586                           ;!BITSFR32             0      0       0      33        0.0%
+  1587                           ;!SFR32                0      0       0      33        0.0%
+  1588                           ;!BANK14              50      0       0      34        0.0%
+  1589                           ;!BITSFR33             0      0       0      34        0.0%
+  1590                           ;!SFR33                0      0       0      34        0.0%
+  1591                           ;!BITBANK15           50      0       0      35        0.0%
+  1592                           ;!BITSFR34             0      0       0      35        0.0%
+  1593                           ;!SFR34                0      0       0      35        0.0%
+  1594                           ;!BANK15              50      0       0      36        0.0%
+  1595                           ;!BITSFR35             0      0       0      36        0.0%
+  1596                           ;!SFR35                0      0       0      36        0.0%
+  1597                           ;!BITBANK16           50      0       0      37        0.0%
+  1598                           ;!BITSFR36             0      0       0      37        0.0%
+  1599                           ;!SFR36                0      0       0      37        0.0%
+  1600                           ;!BANK16              50      0       0      38        0.0%
+  1601                           ;!BITSFR37             0      0       0      38        0.0%
+  1602                           ;!SFR37                0      0       0      38        0.0%
+  1603                           ;!BITBANK17           50      0       0      39        0.0%
+  1604                           ;!BITSFR38             0      0       0      39        0.0%
+  1605                           ;!SFR38                0      0       0      39        0.0%
+  1606                           ;!BANK17              50      0       0      40        0.0%
+  1607                           ;!BITSFR39             0      0       0      40        0.0%
+  1608                           ;!SFR39                0      0       0      40        0.0%
+  1609                           ;!BITBANK18           50      0       0      41        0.0%
+  1610                           ;!BITSFR40             0      0       0      41        0.0%
+  1611                           ;!SFR40                0      0       0      41        0.0%
+  1612                           ;!BANK18              50      0       0      42        0.0%
+  1613                           ;!BITSFR41             0      0       0      42        0.0%
+  1614                           ;!SFR41                0      0       0      42        0.0%
+  1615                           ;!BITBANK19           50      0       0      43        0.0%
+  1616                           ;!BITSFR42             0      0       0      43        0.0%
+  1617                           ;!SFR42                0      0       0      43        0.0%
+  1618                           ;!BANK19              50      0       0      44        0.0%
+  1619                           ;!BITSFR43             0      0       0      44        0.0%
+  1620                           ;!SFR43                0      0       0      44        0.0%
+  1621                           ;!BITBANK20           50      0       0      45        0.0%
+  1622                           ;!BITSFR44             0      0       0      45        0.0%
+  1623                           ;!SFR44                0      0       0      45        0.0%
+  1624                           ;!BANK20              50      0       0      46        0.0%
+  1625                           ;!BITSFR45             0      0       0      46        0.0%
+  1626                           ;!SFR45                0      0       0      46        0.0%
+  1627                           ;!BITBANK21           50      0       0      47        0.0%
+  1628                           ;!BITSFR46             0      0       0      47        0.0%
+  1629                           ;!SFR46                0      0       0      47        0.0%
+  1630                           ;!BANK21              50      0       0      48        0.0%
+  1631                           ;!BITSFR47             0      0       0      48        0.0%
+  1632                           ;!SFR47                0      0       0      48        0.0%
+  1633                           ;!BITBANK22           50      0       0      49        0.0%
+  1634                           ;!BITSFR48             0      0       0      49        0.0%
+  1635                           ;!SFR48                0      0       0      49        0.0%
+  1636                           ;!BANK22              50      0       0      50        0.0%
+  1637                           ;!BITSFR49             0      0       0      50        0.0%
+  1638                           ;!SFR49                0      0       0      50        0.0%
+  1639                           ;!BITBANK23           50      0       0      51        0.0%
+  1640                           ;!BITSFR50             0      0       0      51        0.0%
+  1641                           ;!SFR50                0      0       0      51        0.0%
+  1642                           ;!BANK23              50      0       0      52        0.0%
+  1643                           ;!BITSFR51             0      0       0      52        0.0%
+  1644                           ;!SFR51                0      0       0      52        0.0%
+  1645                           ;!BITBANK24           50      0       0      53        0.0%
+  1646                           ;!BITSFR52             0      0       0      53        0.0%
+  1647                           ;!SFR52                0      0       0      53        0.0%
+  1648                           ;!BANK24              50      0       0      54        0.0%
+  1649                           ;!BITSFR53             0      0       0      54        0.0%
+  1650                           ;!SFR53                0      0       0      54        0.0%
+  1651                           ;!BITBANK25           50      0       0      55        0.0%
+  1652                           ;!BITSFR54             0      0       0      55        0.0%
+  1653                           ;!SFR54                0      0       0      55        0.0%
+  1654                           ;!BANK25              50      0       0      56        0.0%
+  1655                           ;!BITSFR55             0      0       0      56        0.0%
+  1656                           ;!SFR55                0      0       0      56        0.0%
+  1657                           ;!BITBANK26           50      0       0      57        0.0%
+  1658                           ;!BITSFR56             0      0       0      57        0.0%
+  1659                           ;!SFR56                0      0       0      57        0.0%
+  1660                           ;!BANK26              50      0       0      58        0.0%
+  1661                           ;!BITSFR57             0      0       0      58        0.0%
+  1662                           ;!SFR57                0      0       0      58        0.0%
+  1663                           ;!BITSFR58             0      0       0      59        0.0%
+  1664                           ;!SFR58                0      0       0      59        0.0%
+  1665                           ;!DATA                 0      0       8      59        0.0%
+  1666                           ;!BITBANK27           50      0       0      60        0.0%
+  1667                           ;!BITSFR59             0      0       0      60        0.0%
+  1668                           ;!SFR59                0      0       0      60        0.0%
+  1669                           ;!BANK27              50      0       0      61        0.0%
+  1670                           ;!BITSFR60             0      0       0      61        0.0%
+  1671                           ;!SFR60                0      0       0      61        0.0%
+  1672                           ;!BITBANK28           50      0       0      62        0.0%
+  1673                           ;!BITSFR61             0      0       0      62        0.0%
+  1674                           ;!SFR61                0      0       0      62        0.0%
+  1675                           ;!BANK28              50      0       0      63        0.0%
+  1676                           ;!BITSFR62             0      0       0      63        0.0%
+  1677                           ;!SFR62                0      0       0      63        0.0%
+  1678                           ;!BITBANK29           50      0       0      64        0.0%
+  1679                           ;!BITSFR63             0      0       0      64        0.0%
+  1680                           ;!SFR63                0      0       0      64        0.0%
+  1681                           ;!BANK29              50      0       0      65        0.0%
+  1682                           ;!BITBANK30           50      0       0      66        0.0%
+  1683                           ;!BANK30              50      0       0      67        0.0%
+  1684                           ;!BITBANK31           50      0       0      68        0.0%
+  1685                           ;!BANK31              50      0       0      69        0.0%
+  1686                           ;!BITBANK32           50      0       0      70        0.0%
+  1687                           ;!BANK32              50      0       0      71        0.0%
+  1688                           ;!BITBANK33           50      0       0      72        0.0%
+  1689                           ;!BANK33              50      0       0      73        0.0%
+  1690                           ;!BITBANK34           50      0       0      74        0.0%
+  1691                           ;!BANK34              50      0       0      75        0.0%
+  1692                           ;!BITBANK35           50      0       0      76        0.0%
+  1693                           ;!BANK35              50      0       0      77        0.0%
+  1694                           ;!BITBANK36           50      0       0      78        0.0%
+  1695                           ;!BANK36              50      0       0      79        0.0%
+  1696                           ;!BITBANK37           50      0       0      80        0.0%
+  1697                           ;!BANK37              50      0       0      81        0.0%
+  1698                           ;!BITBANK38           50      0       0      82        0.0%
+  1699                           ;!BANK38              50      0       0      83        0.0%
+  1700                           ;!BITBANK39           50      0       0      84        0.0%
+  1701                           ;!BANK39              50      0       0      85        0.0%
+  1702                           ;!BITBANK40           50      0       0      86        0.0%
+  1703                           ;!BANK40              50      0       0      87        0.0%
+  1704                           ;!BITBANK41           50      0       0      88        0.0%
+  1705                           ;!BANK41              50      0       0      89        0.0%
+  1706                           ;!BITBANK42           50      0       0      90        0.0%
+  1707                           ;!BANK42              50      0       0      91        0.0%
+  1708                           ;!BITBANK43           50      0       0      92        0.0%
+  1709                           ;!BANK43              50      0       0      93        0.0%
+  1710                           ;!BITBANK44           50      0       0      94        0.0%
+  1711                           ;!BANK44              50      0       0      95        0.0%
+  1712                           ;!BITBANK45           50      0       0      96        0.0%
+  1713                           ;!BANK45              50      0       0      97        0.0%
+  1714                           ;!BITBANK46           50      0       0      98        0.0%
+  1715                           ;!BANK46              50      0       0      99        0.0%
+  1716                           ;!BITBANK47           50      0       0     100        0.0%
+  1717                           ;!BANK47              50      0       0     101        0.0%
+  1718                           ;!BITBANK48           50      0       0     102        0.0%
+  1719                           ;!BANK48              50      0       0     103        0.0%
+  1720                           ;!BITBANK49           50      0       0     104        0.0%
+  1721                           ;!BANK49              50      0       0     105        0.0%
+  1722                           ;!BITBANK50           50      0       0     106        0.0%
+  1723                           ;!BANK50              50      0       0     107        0.0%
+  1724                           
+  1725                           	global	_main
+  1726                           
+  1727 ;; *************** function _main *****************
+  1728 ;; Defined at:
+  1729 ;;		line 58 in file "main.c"
+  1730 ;; Parameters:    Size  Location     Type
+  1731 ;;		None
+  1732 ;; Auto vars:     Size  Location     Type
+  1733 ;;  i               2    4[COMMON] int 
+  1734 ;;  i               2    2[COMMON] int 
+  1735 ;; Return value:  Size  Location     Type
+  1736 ;;                  1    wreg      void 
+  1737 ;; Registers used:
+  1738 ;;		wreg, status,2, status,0, pclath, cstack
+  1739 ;; Tracked objects:
+  1740 ;;		On entry : B3F/0
+  1741 ;;		On exit  : 0/0
+  1742 ;;		Unchanged: 0/0
+  1743 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25  BANK2
+       6  BANK27  BANK28  BANK29  BANK30  BANK31  BANK32  BANK33  BANK34  BANK35  BANK36  BANK37  BANK38  BANK39  BANK40  BANK4
+       1  BANK42  BANK43  BANK44  BANK45  BANK46  BANK47  BANK48  BANK49  BANK50
+  1744 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  1745 ;;      Locals:         4       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  1746 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  1747 ;;      Totals:         5       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  1748 ;;Total ram usage:        5 bytes
+  1749 ;; Hardware stack levels required when called:    1
+  1750 ;; This function calls:
+  1751 ;;		_ledcheck
+  1752 ;; This function is called by:
+  1753 ;;		Startup code after reset
+  1754 ;; This function uses a non-reentrant model
+  1755 ;;
+  1756                           psect	maintext,global,class=CODE,delta=2,merge=1,split=1,group=0
+  1757                           	file	"main.c"
+  1758                           	line	58
+  1759                           global __pmaintext
+  1760                           __pmaintext:	;psect for function _main
+  1761  0779                     psect	maintext
+  1762                           	file	"main.c"
+  1763                           	line	58
+  1764                           	global	__size_of_main
+  1765                           	__size_of_main	equ	__end_of_main-_main
+  1766  0082                     	
+  1767                           _main:	
+  1768  0779                     ;incstack = 0
+  1769                           	opt	stack 15
+  1770                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+  1771                           	line	62
+  1772                           	
+  1773                           l512:	
+  1774  0779                     ;main.c: 62: ADCON1= 0b01111110;
+  1775                           	movlw	low(07Eh)
+  1776  0779  307E               	movlb 1	; select bank1
+  1777  077A  0141               	movwf	(148)^080h	;volatile
+  1778  077B  0094               	line	63
+  1779                           ;main.c: 63: TRISA= 0b11111111;
+  1780                           	movlw	low(0FFh)
+  1781  077C  30FF               	movlb 0	; select bank0
+  1782  077D  0140               	movwf	(17)	;volatile
+  1783  077E  0091               	line	64
+  1784                           	
+  1785                           l514:	
+  1786  077F                     ;main.c: 64: TRISB= 0b00000000;
+  1787                           	clrf	(18)	;volatile
+  1788  077F  0192               	line	65
+  1789                           	
+  1790                           l516:	
+  1791  0780                     ;main.c: 65: TRISC= 0b00000000;
+  1792                           	clrf	(19)	;volatile
+  1793  0780  0193               	line	66
+  1794                           	
+  1795                           l518:	
+  1796  0781                     ;main.c: 66: PORTB= 0b00000000;
+  1797                           	clrf	(13)	;volatile
+  1798  0781  018D               	line	67
+  1799                           	
+  1800                           l520:	
+  1801  0782                     ;main.c: 67: PORTC= 0b00000000;
+  1802                           	clrf	(14)	;volatile
+  1803  0782  018E               	line	68
+  1804                           	
+  1805                           l522:	
+  1806  0783                     ;main.c: 68: ADCON0bits.ADON=1;
+  1807                           	movlb 1	; select bank1
+  1808  0783  0141               	bsf	(147)^080h,7	;volatile
+  1809  0784  1793               	line	69
+  1810                           ;main.c: 69: ADCON2= 0b10000000;
+  1811                           	movlw	low(080h)
+  1812  0785  3080               	movwf	(149)^080h	;volatile
+  1813  0786  0095               	goto	l524
+  1814  0787  2F88               	line	71
+  1815                           ;main.c: 71: while(1){
+  1816                           	
+  1817                           l41:	
+  1818  0788                     	line	72
+  1819                           	
+  1820                           l524:	
+  1821  0788                     ;main.c: 72: for(int i=0; i<100; i++){
+  1822                           	clrf	(main@i)
+  1823  0788  01F2               	clrf	(main@i+1)
+  1824  0789  01F3               	
+  1825                           l526:	
+  1826  078A                     	movf	(main@i+1),w
+  1827  078A  0873               	xorlw	80h
+  1828  078B  3A80               	movwf	(??_main+0)+0
+  1829  078C  00F1               	movlw	(0)^80h
+  1830  078D  3080               	subwf	(??_main+0)+0,w
+  1831  078E  0271               	skipz
+  1832  078F  1D03               	goto	u35
+  1833  0790  2F93               	movlw	064h
+  1834  0791  3064               	subwf	(main@i),w
+  1835  0792  0272               u35:
+  1836  0793                     
+  1837                           	skipc
+  1838  0793  1C03               	goto	u31
+  1839  0794  2F96               	goto	u30
+  1840  0795  2F97               u31:
+  1841  0796                     	goto	l530
+  1842  0796  2F99               u30:
+  1843  0797                     	goto	l544
+  1844  0797  2FC1               	
+  1845                           l528:	
+  1846  0798                     	goto	l544
+  1847  0798  2FC1               	
+  1848                           l42:	
+  1849  0799                     	line	73
+  1850                           	
+  1851                           l530:	
+  1852  0799                     ;main.c: 73: ledcheck();
+  1853                           	fcall	_ledcheck
+  1854  0799  3187  2759  3187   	line	74
+  1855                           	
+  1856                           l532:	
+  1857  079C                     ;main.c: 74: PORTCbits.RC5 = 1;
+  1858                           	movlb 0	; select bank0
+  1859  079C  0140               	bsf	(14),5	;volatile
+  1860  079D  168E               	line	75
+  1861                           	
+  1862                           l534:	
+  1863  079E                     ;main.c: 75: _delay((unsigned long)((200)*(32000000/4000000.0)));
+  1864                           	opt asmopt_push
+  1865                           opt asmopt_off
+  1866                           	movlw	228
+  1867  079E  30E4               u77:
+  1868  079F                     	nop2
+  1869  079F  3200               	nop2
+  1870  07A0  3200               decfsz	wreg
+  1871  07A1  0B89               	goto	u77
+  1872  07A2  2F9F               	nop2
+  1873  07A3  3200               	nop2
+  1874  07A4  3200               opt asmopt_pop
+  1875                           
+  1876                           	line	76
+  1877                           	
+  1878                           l536:	
+  1879  07A5                     ;main.c: 76: PORTCbits.RC5 = 0;
+  1880                           	movlb 0	; select bank0
+  1881  07A5  0140               	bcf	(14),5	;volatile
+  1882  07A6  128E               	line	77
+  1883                           	
+  1884                           l538:	
+  1885  07A7                     ;main.c: 77: _delay((unsigned long)((1800)*(32000000/4000000.0)));
+  1886                           	opt asmopt_push
+  1887                           opt asmopt_off
+  1888                           movlw	19
+  1889  07A7  3013               movwf	((??_main+0)+0),f
+  1890  07A8  00F1               	movlw	178
+  1891  07A9  30B2               u87:
+  1892  07AA                     decfsz	wreg
+  1893  07AA  0B89               	goto	u87
+  1894  07AB  2FAA               	decfsz	((??_main+0)+0),f
+  1895  07AC  0BF1               	goto	u87
+  1896  07AD  2FAA               	nop2
+  1897  07AE  3200               opt asmopt_pop
+  1898                           
+  1899                           	line	72
+  1900                           	
+  1901                           l540:	
+  1902  07AF                     	movlw	01h
+  1903  07AF  3001               	addwf	(main@i),f
+  1904  07B0  07F2               	movlw	0
+  1905  07B1  3000               	addwfc	(main@i+1),f
+  1906  07B2  3DF3               	
+  1907                           l542:	
+  1908  07B3                     	movf	(main@i+1),w
+  1909  07B3  0873               	xorlw	80h
+  1910  07B4  3A80               	movwf	(??_main+0)+0
+  1911  07B5  00F1               	movlw	(0)^80h
+  1912  07B6  3080               	subwf	(??_main+0)+0,w
+  1913  07B7  0271               	skipz
+  1914  07B8  1D03               	goto	u45
+  1915  07B9  2FBC               	movlw	064h
+  1916  07BA  3064               	subwf	(main@i),w
+  1917  07BB  0272               u45:
+  1918  07BC                     
+  1919                           	skipc
+  1920  07BC  1C03               	goto	u41
+  1921  07BD  2FBF               	goto	u40
+  1922  07BE  2FC0               u41:
+  1923  07BF                     	goto	l530
+  1924  07BF  2F99               u40:
+  1925  07C0                     	goto	l544
+  1926  07C0  2FC1               	
+  1927                           l43:	
+  1928  07C1                     	line	79
+  1929                           	
+  1930                           l544:	
+  1931  07C1                     ;main.c: 78: }
+  1932                           ;main.c: 79: for(int i=0; i<100; i++){
+  1933                           	clrf	(main@i_162)
+  1934  07C1  01F4               	clrf	(main@i_162+1)
+  1935  07C2  01F5               	
+  1936                           l546:	
+  1937  07C3                     	movf	(main@i_162+1),w
+  1938  07C3  0875               	xorlw	80h
+  1939  07C4  3A80               	movwf	(??_main+0)+0
+  1940  07C5  00F1               	movlw	(0)^80h
+  1941  07C6  3080               	subwf	(??_main+0)+0,w
+  1942  07C7  0271               	skipz
+  1943  07C8  1D03               	goto	u55
+  1944  07C9  2FCC               	movlw	064h
+  1945  07CA  3064               	subwf	(main@i_162),w
+  1946  07CB  0274               u55:
+  1947  07CC                     
+  1948                           	skipc
+  1949  07CC  1C03               	goto	u51
+  1950  07CD  2FCF               	goto	u50
+  1951  07CE  2FD0               u51:
+  1952  07CF                     	goto	l550
+  1953  07CF  2FD2               u50:
+  1954  07D0                     	goto	l524
+  1955  07D0  2F88               	
+  1956                           l548:	
+  1957  07D1                     	goto	l524
+  1958  07D1  2F88               	
+  1959                           l44:	
+  1960  07D2                     	line	80
+  1961                           	
+  1962                           l550:	
+  1963  07D2                     ;main.c: 80: ledcheck();
+  1964                           	fcall	_ledcheck
+  1965  07D2  3187  2759  3187   	line	81
+  1966                           	
+  1967                           l552:	
+  1968  07D5                     ;main.c: 81: PORTCbits.RC5 = 1;
+  1969                           	movlb 0	; select bank0
+  1970  07D5  0140               	bsf	(14),5	;volatile
+  1971  07D6  168E               	line	82
+  1972                           	
+  1973                           l554:	
+  1974  07D7                     ;main.c: 82: _delay((unsigned long)((100)*(32000000/4000000.0)));
+  1975                           	opt asmopt_push
+  1976                           opt asmopt_off
+  1977                           	movlw	160
+  1978  07D7  30A0               u97:
+  1979  07D8                     	nop2
+  1980  07D8  3200               decfsz	wreg
+  1981  07D9  0B89               	goto	u97
+  1982  07DA  2FD8               opt asmopt_pop
+  1983                           
+  1984                           	line	83
+  1985                           	
+  1986                           l556:	
+  1987  07DB                     ;main.c: 83: PORTCbits.RC5 = 0;
+  1988                           	movlb 0	; select bank0
+  1989  07DB  0140               	bcf	(14),5	;volatile
+  1990  07DC  128E               	line	84
+  1991                           	
+  1992                           l558:	
+  1993  07DD                     ;main.c: 84: _delay((unsigned long)((1900)*(32000000/4000000.0)));
+  1994                           	opt asmopt_push
+  1995                           opt asmopt_off
+  1996                           movlw	20
+  1997  07DD  3014               movwf	((??_main+0)+0),f
+  1998  07DE  00F1               	movlw	188
+  1999  07DF  30BC               u107:
+  2000  07E0                     decfsz	wreg
+  2001  07E0  0B89               	goto	u107
+  2002  07E1  2FE0               	decfsz	((??_main+0)+0),f
+  2003  07E2  0BF1               	goto	u107
+  2004  07E3  2FE0               	nop2
+  2005  07E4  3200               opt asmopt_pop
+  2006                           
+  2007                           	line	79
+  2008                           	
+  2009                           l560:	
+  2010  07E5                     	movlw	01h
+  2011  07E5  3001               	addwf	(main@i_162),f
+  2012  07E6  07F4               	movlw	0
+  2013  07E7  3000               	addwfc	(main@i_162+1),f
+  2014  07E8  3DF5               	
+  2015                           l562:	
+  2016  07E9                     	movf	(main@i_162+1),w
+  2017  07E9  0875               	xorlw	80h
+  2018  07EA  3A80               	movwf	(??_main+0)+0
+  2019  07EB  00F1               	movlw	(0)^80h
+  2020  07EC  3080               	subwf	(??_main+0)+0,w
+  2021  07ED  0271               	skipz
+  2022  07EE  1D03               	goto	u65
+  2023  07EF  2FF2               	movlw	064h
+  2024  07F0  3064               	subwf	(main@i_162),w
+  2025  07F1  0274               u65:
+  2026  07F2                     
+  2027                           	skipc
+  2028  07F2  1C03               	goto	u61
+  2029  07F3  2FF5               	goto	u60
+  2030  07F4  2FF6               u61:
+  2031  07F5                     	goto	l550
+  2032  07F5  2FD2               u60:
+  2033  07F6                     	goto	l524
+  2034  07F6  2F88               	
+  2035                           l45:	
+  2036  07F7                     	goto	l524
+  2037  07F7  2F88               	line	87
+  2038                           	
+  2039                           l46:	
+  2040  07F8                     	line	71
+  2041                           	goto	l524
+  2042  07F8  2F88               	
+  2043                           l47:	
+  2044  07F9                     	line	89
+  2045                           	
+  2046                           l48:	
+  2047  07F9                     	global	start
+  2048                           	ljmp	start
+  2049  07F9  3180  2802         	opt stack 0
+  2050                           GLOBAL	__end_of_main
+  2051                           	__end_of_main:
+  2052  07FB                     	signat	_main,89
+  2053                           	global	_ledcheck
+  2054                           
+  2055 ;; *************** function _ledcheck *****************
+  2056 ;; Defined at:
+  2057 ;;		line 44 in file "main.c"
+  2058 ;; Parameters:    Size  Location     Type
+  2059 ;;		None
+  2060 ;; Auto vars:     Size  Location     Type
+  2061 ;;		None
+  2062 ;; Return value:  Size  Location     Type
+  2063 ;;                  1    wreg      void 
+  2064 ;; Registers used:
+  2065 ;;		wreg
+  2066 ;; Tracked objects:
+  2067 ;;		On entry : 0/0
+  2068 ;;		On exit  : 0/0
+  2069 ;;		Unchanged: 0/0
+  2070 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+       1  BANK12  BANK13  BANK14  BANK15  BANK16  BANK17  BANK18  BANK19  BANK20  BANK21  BANK22  BANK23  BANK24  BANK25  BANK2
+       6  BANK27  BANK28  BANK29  BANK30  BANK31  BANK32  BANK33  BANK34  BANK35  BANK36  BANK37  BANK38  BANK39  BANK40  BANK4
+       1  BANK42  BANK43  BANK44  BANK45  BANK46  BANK47  BANK48  BANK49  BANK50
+  2071 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  2072 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  2073 ;;      Temps:          1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  2074 ;;      Totals:         1       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       
+       0       0       0       0       0       0       0       0       0       0
+  2075 ;;Total ram usage:        1 bytes
+  2076 ;; Hardware stack levels used:    1
+  2077 ;; This function calls:
+  2078 ;;		Nothing
+  2079 ;; This function is called by:
+  2080 ;;		_main
+  2081 ;; This function uses a non-reentrant model
+  2082 ;;
+  2083                           psect	text1,local,class=CODE,delta=2,merge=1,group=0
+  2084                           	line	44
+  2085                           global __ptext1
+  2086                           __ptext1:	;psect for function _ledcheck
+  2087  0759                     psect	text1
+  2088                           	file	"main.c"
+  2089                           	line	44
+  2090                           	global	__size_of_ledcheck
+  2091                           	__size_of_ledcheck	equ	__end_of_ledcheck-_ledcheck
+  2092  0020                     	
+  2093                           _ledcheck:	
+  2094  0759                     ;incstack = 0
+  2095                           	opt	stack 15
+  2096                           ; Regs used in _ledcheck: [wreg]
+  2097                           	line	45
+  2098                           	
+  2099                           l506:	
+  2100  0759                     ;main.c: 45: ADCON0bits.GO_nDONE=1;
+  2101                           	movlb 1	; select bank1
+  2102  0759  0141               	bsf	(147)^080h,0	;volatile
+  2103  075A  1413               	line	46
+  2104                           ;main.c: 46: while(ADCON0bits.GO_nDONE==1);
+  2105                           	goto	l31
+  2106  075B  2F5C               	
+  2107                           l32:	
+  2108  075C                     	
+  2109                           l31:	
+  2110  075C                     	btfsc	(147)^080h,0	;volatile
+  2111  075C  1813               	goto	u11
+  2112  075D  2F5F               	goto	u10
+  2113  075E  2F60               u11:
+  2114  075F                     	goto	l31
+  2115  075F  2F5C               u10:
+  2116  0760                     	goto	l508
+  2117  0760  2F61               	
+  2118                           l33:	
+  2119  0761                     	line	48
+  2120                           	
+  2121                           l508:	
+  2122  0761                     ;main.c: 48: analog_reading= ADRESL + (ADRESH *256);
+  2123                           	movf	(141)^080h,w	;volatile
+  2124  0761  080D               	movwf	(_analog_reading+1)
+  2125  0762  00F7               	movf	(140)^080h,w	;volatile
+  2126  0763  080C               	movwf	(_analog_reading)
+  2127  0764  00F6               	line	49
+  2128                           ;main.c: 49: if (analog_reading < 1000){
+  2129                           	movf	(_analog_reading+1),w
+  2130  0765  0877               	xorlw	80h
+  2131  0766  3A80               	movwf	(??_ledcheck+0)+0
+  2132  0767  00F0               	movlw	(03h)^80h
+  2133  0768  3083               	subwf	(??_ledcheck+0)+0,w
+  2134  0769  0270               	skipz
+  2135  076A  1D03               	goto	u25
+  2136  076B  2F6E               	movlw	0E8h
+  2137  076C  30E8               	subwf	(_analog_reading),w
+  2138  076D  0276               u25:
+  2139  076E                     
+  2140                           	skipnc
+  2141  076E  1803               	goto	u21
+  2142  076F  2F71               	goto	u20
+  2143  0770  2F72               u21:
+  2144  0771                     	goto	l34
+  2145  0771  2F75               u20:
+  2146  0772                     	line	50
+  2147                           	
+  2148                           l510:	
+  2149  0772                     ;main.c: 50: PORTBbits.RB4= 0;
+  2150                           	movlb 0	; select bank0
+  2151  0772  0140               	bcf	(13),4	;volatile
+  2152  0773  120D               	line	51
+  2153                           ;main.c: 51: }
+  2154                           	goto	l36
+  2155  0774  2F78               	line	52
+  2156                           	
+  2157                           l34:	
+  2158  0775                     	line	53
+  2159                           ;main.c: 52: else{
+  2160                           ;main.c: 53: PORTBbits.RB4=1;
+  2161                           	movlb 0	; select bank0
+  2162  0775  0140               	bsf	(13),4	;volatile
+  2163  0776  160D               	goto	l36
+  2164  0777  2F78               	line	54
+  2165                           	
+  2166                           l35:	
+  2167  0778                     	line	55
+  2168                           	
+  2169                           l36:	
+  2170  0778                     	return
+  2171  0778  0008               	opt stack 0
+  2172                           GLOBAL	__end_of_ledcheck
+  2173                           	__end_of_ledcheck:
+  2174  0779                     	signat	_ledcheck,89
+  2175                           global	___latbits
+  2176                           ___latbits	equ	4
+  2177  0004                     	global	btemp
+  2178                           	btemp set 07Eh
+  2179  007E                     
+  2180                           	DABS	1,126,2	;btemp
+  2181                           	global	wtemp0
+  2182                           	wtemp0 set btemp+0
+  2183  007E                     	end
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         2
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14      6       8
+    BANK0            80      0       0
+    BANK1            80      0       0
+    BANK2            80      0       0
+    BANK3            80      0       0
+    BANK4            80      0       0
+    BANK5            80      0       0
+    BANK6            80      0       0
+    BANK7            80      0       0
+    BANK8            80      0       0
+    BANK9            80      0       0
+    BANK10           80      0       0
+    BANK11           80      0       0
+    BANK12           80      0       0
+    BANK13           80      0       0
+    BANK14           80      0       0
+    BANK15           80      0       0
+    BANK16           80      0       0
+    BANK17           80      0       0
+    BANK18           80      0       0
+    BANK19           80      0       0
+    BANK20           80      0       0
+    BANK21           80      0       0
+    BANK22           80      0       0
+    BANK23           80      0       0
+    BANK24           80      0       0
+    BANK25           80      0       0
+    BANK26           80      0       0
+    BANK27           80      0       0
+    BANK28           80      0       0
+    BANK29           80      0       0
+    BANK30           80      0       0
+    BANK31           80      0       0
+    BANK32           80      0       0
+    BANK33           80      0       0
+    BANK34           80      0       0
+    BANK35           80      0       0
+    BANK36           80      0       0
+    BANK37           80      0       0
+    BANK38           80      0       0
+    BANK39           80      0       0
+    BANK40           80      0       0
+    BANK41           80      0       0
+    BANK42           80      0       0
+    BANK43           80      0       0
+    BANK44           80      0       0
+    BANK45           80      0       0
+    BANK46           80      0       0
+    BANK47           80      0       0
+    BANK48           80      0       0
+    BANK49           80      0       0
+    BANK50           80      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    _main->_ledcheck
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Critical Paths under _main in BANK8
+
+    None.
+
+Critical Paths under _main in BANK9
+
+    None.
+
+Critical Paths under _main in BANK10
+
+    None.
+
+Critical Paths under _main in BANK11
+
+    None.
+
+Critical Paths under _main in BANK12
+
+    None.
+
+Critical Paths under _main in BANK13
+
+    None.
+
+Critical Paths under _main in BANK14
+
+    None.
+
+Critical Paths under _main in BANK15
+
+    None.
+
+Critical Paths under _main in BANK16
+
+    None.
+
+Critical Paths under _main in BANK17
+
+    None.
+
+Critical Paths under _main in BANK18
+
+    None.
+
+Critical Paths under _main in BANK19
+
+    None.
+
+Critical Paths under _main in BANK20
+
+    None.
+
+Critical Paths under _main in BANK21
+
+    None.
+
+Critical Paths under _main in BANK22
+
+    None.
+
+Critical Paths under _main in BANK23
+
+    None.
+
+Critical Paths under _main in BANK24
+
+    None.
+
+Critical Paths under _main in BANK25
+
+    None.
+
+Critical Paths under _main in BANK26
+
+    None.
+
+Critical Paths under _main in BANK27
+
+    None.
+
+Critical Paths under _main in BANK28
+
+    None.
+
+Critical Paths under _main in BANK29
+
+    None.
+
+Critical Paths under _main in BANK30
+
+    None.
+
+Critical Paths under _main in BANK31
+
+    None.
+
+Critical Paths under _main in BANK32
+
+    None.
+
+Critical Paths under _main in BANK33
+
+    None.
+
+Critical Paths under _main in BANK34
+
+    None.
+
+Critical Paths under _main in BANK35
+
+    None.
+
+Critical Paths under _main in BANK36
+
+    None.
+
+Critical Paths under _main in BANK37
+
+    None.
+
+Critical Paths under _main in BANK38
+
+    None.
+
+Critical Paths under _main in BANK39
+
+    None.
+
+Critical Paths under _main in BANK40
+
+    None.
+
+Critical Paths under _main in BANK41
+
+    None.
+
+Critical Paths under _main in BANK42
+
+    None.
+
+Critical Paths under _main in BANK43
+
+    None.
+
+Critical Paths under _main in BANK44
+
+    None.
+
+Critical Paths under _main in BANK45
+
+    None.
+
+Critical Paths under _main in BANK46
+
+    None.
+
+Critical Paths under _main in BANK47
+
+    None.
+
+Critical Paths under _main in BANK48
+
+    None.
+
+Critical Paths under _main in BANK49
+
+    None.
+
+Critical Paths under _main in BANK50
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 5     5      0      60
+                                              1 COMMON     5     5      0
+                           _ledcheck
+ ---------------------------------------------------------------------------------
+ (1) _ledcheck                                             1     1      0       0
+                                              0 COMMON     1     1      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _ledcheck
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             FF0      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITCOMMON            E      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               E      6       8       2       57.1%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+BITSFR2              0      0       0       3        0.0%
+SFR2                 0      0       0       3        0.0%
+STACK                0      0       0       3        0.0%
+BITBANK0            50      0       0       4        0.0%
+BITSFR3              0      0       0       4        0.0%
+SFR3                 0      0       0       4        0.0%
+BANK0               50      0       0       5        0.0%
+BITSFR4              0      0       0       5        0.0%
+SFR4                 0      0       0       5        0.0%
+BITBANK1            50      0       0       6        0.0%
+BITSFR5              0      0       0       6        0.0%
+SFR5                 0      0       0       6        0.0%
+BANK1               50      0       0       7        0.0%
+BITSFR6              0      0       0       7        0.0%
+SFR6                 0      0       0       7        0.0%
+BITBANK2            50      0       0       8        0.0%
+BITSFR7              0      0       0       8        0.0%
+SFR7                 0      0       0       8        0.0%
+BANK2               50      0       0       9        0.0%
+BITSFR8              0      0       0       9        0.0%
+SFR8                 0      0       0       9        0.0%
+BITBANK3            50      0       0      10        0.0%
+BITSFR9              0      0       0      10        0.0%
+SFR9                 0      0       0      10        0.0%
+BANK3               50      0       0      11        0.0%
+BITSFR10             0      0       0      11        0.0%
+SFR10                0      0       0      11        0.0%
+BITBANK4            50      0       0      12        0.0%
+BITSFR11             0      0       0      12        0.0%
+SFR11                0      0       0      12        0.0%
+BANK4               50      0       0      13        0.0%
+BITSFR12             0      0       0      13        0.0%
+SFR12                0      0       0      13        0.0%
+BITBANK5            50      0       0      14        0.0%
+BITSFR13             0      0       0      14        0.0%
+SFR13                0      0       0      14        0.0%
+BANK5               50      0       0      15        0.0%
+BITSFR14             0      0       0      15        0.0%
+SFR14                0      0       0      15        0.0%
+BITBANK6            50      0       0      16        0.0%
+BITSFR15             0      0       0      16        0.0%
+SFR15                0      0       0      16        0.0%
+BANK6               50      0       0      17        0.0%
+BITSFR16             0      0       0      17        0.0%
+SFR16                0      0       0      17        0.0%
+BITBANK7            50      0       0      18        0.0%
+BITSFR17             0      0       0      18        0.0%
+SFR17                0      0       0      18        0.0%
+BANK7               50      0       0      19        0.0%
+BITSFR18             0      0       0      19        0.0%
+SFR18                0      0       0      19        0.0%
+BITBANK8            50      0       0      20        0.0%
+BITSFR19             0      0       0      20        0.0%
+SFR19                0      0       0      20        0.0%
+BANK8               50      0       0      21        0.0%
+BITSFR20             0      0       0      21        0.0%
+SFR20                0      0       0      21        0.0%
+BITBANK9            50      0       0      22        0.0%
+BITSFR21             0      0       0      22        0.0%
+SFR21                0      0       0      22        0.0%
+BANK9               50      0       0      23        0.0%
+BITSFR22             0      0       0      23        0.0%
+SFR22                0      0       0      23        0.0%
+BITBANK10           50      0       0      24        0.0%
+BITSFR23             0      0       0      24        0.0%
+SFR23                0      0       0      24        0.0%
+BANK10              50      0       0      25        0.0%
+BITSFR24             0      0       0      25        0.0%
+SFR24                0      0       0      25        0.0%
+BITBANK11           50      0       0      26        0.0%
+BITSFR25             0      0       0      26        0.0%
+SFR25                0      0       0      26        0.0%
+BANK11              50      0       0      27        0.0%
+BITSFR26             0      0       0      27        0.0%
+SFR26                0      0       0      27        0.0%
+BITSFR27             0      0       0      28        0.0%
+SFR27                0      0       0      28        0.0%
+ABS                  0      0       8      28        0.0%
+BITBANK12           50      0       0      29        0.0%
+BITSFR28             0      0       0      29        0.0%
+SFR28                0      0       0      29        0.0%
+BANK12              50      0       0      30        0.0%
+BITSFR29             0      0       0      30        0.0%
+SFR29                0      0       0      30        0.0%
+BITBANK13           50      0       0      31        0.0%
+BITSFR30             0      0       0      31        0.0%
+SFR30                0      0       0      31        0.0%
+BANK13              50      0       0      32        0.0%
+BITSFR31             0      0       0      32        0.0%
+SFR31                0      0       0      32        0.0%
+BITBANK14           50      0       0      33        0.0%
+BITSFR32             0      0       0      33        0.0%
+SFR32                0      0       0      33        0.0%
+BANK14              50      0       0      34        0.0%
+BITSFR33             0      0       0      34        0.0%
+SFR33                0      0       0      34        0.0%
+BITBANK15           50      0       0      35        0.0%
+BITSFR34             0      0       0      35        0.0%
+SFR34                0      0       0      35        0.0%
+BANK15              50      0       0      36        0.0%
+BITSFR35             0      0       0      36        0.0%
+SFR35                0      0       0      36        0.0%
+BITBANK16           50      0       0      37        0.0%
+BITSFR36             0      0       0      37        0.0%
+SFR36                0      0       0      37        0.0%
+BANK16              50      0       0      38        0.0%
+BITSFR37             0      0       0      38        0.0%
+SFR37                0      0       0      38        0.0%
+BITBANK17           50      0       0      39        0.0%
+BITSFR38             0      0       0      39        0.0%
+SFR38                0      0       0      39        0.0%
+BANK17              50      0       0      40        0.0%
+BITSFR39             0      0       0      40        0.0%
+SFR39                0      0       0      40        0.0%
+BITBANK18           50      0       0      41        0.0%
+BITSFR40             0      0       0      41        0.0%
+SFR40                0      0       0      41        0.0%
+BANK18              50      0       0      42        0.0%
+BITSFR41             0      0       0      42        0.0%
+SFR41                0      0       0      42        0.0%
+BITBANK19           50      0       0      43        0.0%
+BITSFR42             0      0       0      43        0.0%
+SFR42                0      0       0      43        0.0%
+BANK19              50      0       0      44        0.0%
+BITSFR43             0      0       0      44        0.0%
+SFR43                0      0       0      44        0.0%
+BITBANK20           50      0       0      45        0.0%
+BITSFR44             0      0       0      45        0.0%
+SFR44                0      0       0      45        0.0%
+BANK20              50      0       0      46        0.0%
+BITSFR45             0      0       0      46        0.0%
+SFR45                0      0       0      46        0.0%
+BITBANK21           50      0       0      47        0.0%
+BITSFR46             0      0       0      47        0.0%
+SFR46                0      0       0      47        0.0%
+BANK21              50      0       0      48        0.0%
+BITSFR47             0      0       0      48        0.0%
+SFR47                0      0       0      48        0.0%
+BITBANK22           50      0       0      49        0.0%
+BITSFR48             0      0       0      49        0.0%
+SFR48                0      0       0      49        0.0%
+BANK22              50      0       0      50        0.0%
+BITSFR49             0      0       0      50        0.0%
+SFR49                0      0       0      50        0.0%
+BITBANK23           50      0       0      51        0.0%
+BITSFR50             0      0       0      51        0.0%
+SFR50                0      0       0      51        0.0%
+BANK23              50      0       0      52        0.0%
+BITSFR51             0      0       0      52        0.0%
+SFR51                0      0       0      52        0.0%
+BITBANK24           50      0       0      53        0.0%
+BITSFR52             0      0       0      53        0.0%
+SFR52                0      0       0      53        0.0%
+BANK24              50      0       0      54        0.0%
+BITSFR53             0      0       0      54        0.0%
+SFR53                0      0       0      54        0.0%
+BITBANK25           50      0       0      55        0.0%
+BITSFR54             0      0       0      55        0.0%
+SFR54                0      0       0      55        0.0%
+BANK25              50      0       0      56        0.0%
+BITSFR55             0      0       0      56        0.0%
+SFR55                0      0       0      56        0.0%
+BITBANK26           50      0       0      57        0.0%
+BITSFR56             0      0       0      57        0.0%
+SFR56                0      0       0      57        0.0%
+BANK26              50      0       0      58        0.0%
+BITSFR57             0      0       0      58        0.0%
+SFR57                0      0       0      58        0.0%
+BITSFR58             0      0       0      59        0.0%
+SFR58                0      0       0      59        0.0%
+DATA                 0      0       8      59        0.0%
+BITBANK27           50      0       0      60        0.0%
+BITSFR59             0      0       0      60        0.0%
+SFR59                0      0       0      60        0.0%
+BANK27              50      0       0      61        0.0%
+BITSFR60             0      0       0      61        0.0%
+SFR60                0      0       0      61        0.0%
+BITBANK28           50      0       0      62        0.0%
+BITSFR61             0      0       0      62        0.0%
+SFR61                0      0       0      62        0.0%
+BANK28              50      0       0      63        0.0%
+BITSFR62             0      0       0      63        0.0%
+SFR62                0      0       0      63        0.0%
+BITBANK29           50      0       0      64        0.0%
+BITSFR63             0      0       0      64        0.0%
+SFR63                0      0       0      64        0.0%
+BANK29              50      0       0      65        0.0%
+BITBANK30           50      0       0      66        0.0%
+BANK30              50      0       0      67        0.0%
+BITBANK31           50      0       0      68        0.0%
+BANK31              50      0       0      69        0.0%
+BITBANK32           50      0       0      70        0.0%
+BANK32              50      0       0      71        0.0%
+BITBANK33           50      0       0      72        0.0%
+BANK33              50      0       0      73        0.0%
+BITBANK34           50      0       0      74        0.0%
+BANK34              50      0       0      75        0.0%
+BITBANK35           50      0       0      76        0.0%
+BANK35              50      0       0      77        0.0%
+BITBANK36           50      0       0      78        0.0%
+BANK36              50      0       0      79        0.0%
+BITBANK37           50      0       0      80        0.0%
+BANK37              50      0       0      81        0.0%
+BITBANK38           50      0       0      82        0.0%
+BANK38              50      0       0      83        0.0%
+BITBANK39           50      0       0      84        0.0%
+BANK39              50      0       0      85        0.0%
+BITBANK40           50      0       0      86        0.0%
+BANK40              50      0       0      87        0.0%
+BITBANK41           50      0       0      88        0.0%
+BANK41              50      0       0      89        0.0%
+BITBANK42           50      0       0      90        0.0%
+BANK42              50      0       0      91        0.0%
+BITBANK43           50      0       0      92        0.0%
+BANK43              50      0       0      93        0.0%
+BITBANK44           50      0       0      94        0.0%
+BANK44              50      0       0      95        0.0%
+BITBANK45           50      0       0      96        0.0%
+BANK45              50      0       0      97        0.0%
+BITBANK46           50      0       0      98        0.0%
+BANK46              50      0       0      99        0.0%
+BITBANK47           50      0       0     100        0.0%
+BANK47              50      0       0     101        0.0%
+BITBANK48           50      0       0     102        0.0%
+BANK48              50      0       0     103        0.0%
+BITBANK49           50      0       0     104        0.0%
+BANK49              50      0       0     105        0.0%
+BITBANK50           50      0       0     106        0.0%
+BANK50              50      0       0     107        0.0%
+
+
+Microchip Technology PIC Macro Assembler V1.44 build -154322312 
+Symbol Table                                                                                   Sun Oct 01 18:31:56 2017
+
+            __CFG_CP$OFF 0000                       l31 075C                       l32 075C  
+                     l33 0761                       l41 0788                       l34 0775  
+                     l42 0799                       l35 0778                       l43 07C1  
+                     l36 0778                       l44 07D2                       l45 07F7  
+                     l46 07F8                       l47 07F9                       l48 07F9  
+                     u10 0760                       u11 075F                       u20 0772  
+                     u21 0771                       u30 0797                       u31 0796  
+                     u40 07C0                       u25 076E                       u41 07BF  
+                     u50 07D0                       u51 07CF                       u35 0793  
+                     u60 07F6                       u61 07F5                       u45 07BC  
+                     u55 07CC                       u65 07F2                       u77 079F  
+                     u87 07AA                       u97 07D8              __CFG_LVP$ON 0000  
+                    l510 0772                      l520 0782                      l512 0779  
+                    l506 0759                      l530 0799                      l522 0783  
+                    l514 077F                      l508 0761                      l540 07AF  
+                    l532 079C                      l524 0788                      l516 0780  
+                    l550 07D2                      l542 07B3                      l534 079E  
+                    l526 078A                      l518 0781                      l560 07E5  
+                    l552 07D5                      l536 07A5                      l528 0798  
+                    l544 07C1                      l562 07E9                      l554 07D7  
+                    l546 07C3                      l538 07A7                      l556 07DB  
+                    l548 07D1                      l558 07DD                      u107 07E0  
+           __CFG_CPD$OFF 0000             __CFG_BORV$LO 0000                      wreg 0009  
+           __CFG_ZCD$OFF 0000             __CFG_WDTE$ON 0000             __CFG_WRT$OFF 0000  
+          __CFG_FCMEN$ON 0000                     _main 0779                     btemp 007E  
+          __CFG_BOREN$ON 0000                     start 0002            __CFG_CSWEN$ON 0000  
+          __CFG_MCLRE$ON 0000                    ?_main 0070                    _PORTB 000D  
+                  _PORTC 000E                    _TRISA 0011                    _TRISB 0012  
+                  _TRISC 0013                    main@i 0072                    wtemp0 007E  
+        __initialization 07FB             __end_of_main 07FB                   ??_main 0071  
+                 _ADCON1 0094                   _ADCON2 0095                   _ADRESH 008D  
+                 _ADRESL 008C           __CFG_WDTCCS$SC 0000           __CFG_PWRTE$OFF 0000  
+       __end_of_ledcheck 0779           __CFG_STVREN$ON 0000           _analog_reading 0076  
+__end_of__initialization 07FD           __pcstackCOMMON 0070               __pmaintext 0779  
+        __CFG_PPS1WAY$ON 0000                ?_ledcheck 0070     __CFG_SCANE$available 0000  
+                __ptext1 0759               ??_ledcheck 0070     end_of_initialization 07FD  
+  __CFG_WDTCPS$WDTCPS_31 0000                _PORTBbits 000D                _PORTCbits 000E  
+       __CFG_FEXTOSC$ECH 0000      start_initialization 07FB        __CFG_RSTOSC$EXT1X 0000  
+       __CFG_LPBOREN$OFF 0000              __pbssCOMMON 0076                ___latbits 0004  
+      __size_of_ledcheck 0020               _ADCON0bits 0093                main@i_162 0074  
+               _ledcheck 0759            __size_of_main 0082     __CFG_WDTCWS$WDTCWS_7 0000  
+      __CFG_CLKOUTEN$OFF 0000  
