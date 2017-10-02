@@ -39,9 +39,10 @@
 #define _XTAL_FREQ 32000000
 #include <xc.h>
  
-int analog_reading;
+
  
 void ledcheck(void){
+int analog_reading;
 ADCON0bits.GO_nDONE=1; //do A/D measurement
 while(ADCON0bits.GO_nDONE==1);
  
